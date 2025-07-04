@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Welcome to the Link-OS Multiplatform SDK for Android&trade;</title>
+    <style type="text/css">
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        ul {
+            line-height: 175%
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        a:link, a:visited, a:active {
+            text-decoration: none;
+            color: #3A75C4;
+        }
+
+        a:hover, a:focus {
+            text-decoration: none;
+            color: #d09c00;
+        }
+
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .reg {
+            vertical-align: top;
+            font-size: 0.5em;
+        }
+
+        .link-os-text {
+            white-space: nowrap;
+        }
+
+        /* Main header */
+
+        #landingPageHeaderContainer {
+            background-color: black;
+            color: white;
+        }
+
+        #landingPageHeader {
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+            display: block;
+            max-width: 768px;
+            position: relative;
+            margin: 0 auto;
+            height: 240px;
+        }
+
+        #zebraLogo {
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+            display: block;
+            height: 120px;
+            width: 86px;
+            position: absolute;
+            top: 60px;
+            left: 40px;
+        }
+
+        #landingPageHeaderTextContainer {
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+            padding-left: 175px;
+            padding-right: 60px;
+            position: relative;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        .header-text {
+            display: block;
+        }
+
+        #headerWelcomeText {
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+            color: #ffcc33;
+            font-size: 2.5em;
+            font-weight: 100;
+            letter-spacing: 4px;
+        }
+
+        #headerLinkOsText {
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+            font-size: 1.5em;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* Main content */
+        
+        #mainContentContainer {
+            background-color: #ddd;
+            padding: 20px 0;
+        }
+
+        /* Section links */
+
+        .section-link-grid-container {
+            margin: 30px 0 15px 0;
+            line-height: 1em;
+        }
+
+        .section-link-grid-container a {
+            color: inherit;
+        }
+
+        .section-link-container {
+            -webkit-transition: all 0.1s linear;
+            transition: all 0.1s linear;
+            text-align: center;
+            background-color: #eee;
+            padding: 15px;
+            height: 64px;
+        }
+
+        .section-link-container:hover {
+            background-color: #f4f4f4;
+        }
+
+        .section-link-icon-container {
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+            background: #3A75C4;
+            height: 34px;
+            width: 34px;
+            float: left;
+            text-align: center;
+            border-radius: 50px;
+        }
+
+        .section-link-icon-container:hover {
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .section-link-icon {
+            max-height: 20px;
+            max-width: 20px;
+            position: relative;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        .section-link-text-container {
+            overflow: hidden;
+            width: auto;
+            text-align: left;
+            padding-left: 20px;
+            position: relative;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            font-size: 1em;
+        }
+
+        .section-link-heading {
+            color: #3A75C4;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            margin-top: 0;
+            margin-bottom: 3px;
+        }
+
+        .section-link-text {
+            margin: 0;
+            font-size: 0.8em;
+            font-weight: 200;
+        }
+
+        /* Landing page overview */
+
+        #landingPageOverviewContainer {
+            max-width: 768px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        #landingPageOverview {
+            background-color: white;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            padding: 30px;
+            color: #555;
+            font-weight: 300;
+            position: relative;
+        }
+
+        #landingPageOverviewDescriptionContainer {
+            float: left;
+            width: 50%;
+            height: 100%;
+            padding-right: 30px;
+            font-size: 0.8em;
+            line-height: 1.5em;
+            border-right: 1px solid #ddd;
+        }
+
+        #landingPageOverviewZipContainer {
+            float: left;
+            width: 50%;
+            height: 100%;
+            padding-left: 30px;
+            font-size: 0.8em;
+        }
+
+        #zipIcon {
+            width: 3em;
+            height: 3em;
+            display: block;
+            float: left;
+        }
+
+        #landingPageOverviewZipDescription {
+            display: table-cell;
+            vertical-align: middle;
+            width: auto;
+            overflow: hidden;
+            padding-left: 15px;
+            height: 3em;
+        }
+
+        #landingPageOverviewList {
+            font-weight: 500;
+        }
+
+        #landingPageTermsNote {
+            font-size: 0.9em;
+            line-height: 1.1em;
+            font-style: italic;
+            display: block;
+        }
+
+        /* Main footer */
+
+        #landingPageFooter {
+            display: block;
+            background: white;
+            color: #aaa;
+            text-align: center;
+            padding-top: 15px;
+            padding-bottom: 30px;
+        }
+
+        #landingPageFooter a {
+            color: inherit;
+        }
+
+        #landingPageFooterText {
+            font-size: 0.7em;
+        }
+
+        /* Media queries */
+        @media (max-width: 500px) {
+            #landingPageHeader {
+                height: 160px;
+            }
+
+            #zebraLogo {
+                top: 20px;
+                left: 30px;
+            }
+
+            #landingPageHeaderTextContainer {
+                padding-left: 145px;
+            }
+
+            #headerWelcomeText {
+                font-size: 1.5em;
+            }
+
+            #headerLinkOsText {
+                font-size: 1.1em;
+            }
+
+            #landingPageOverviewDescriptionContainer {
+                width: 100%;
+                padding: 0 0 30px;
+                border: 0;
+            }
+
+            #landingPageOverviewZipContainer {
+                padding: 30px 0 0;
+                width: 100%;
+                position: relative;
+            }
+
+            #landingPageOverviewZipContainer:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 25%;
+                right: 25%;
+                border-top: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="landingPageHeaderContainer">
+        <header id="landingPageHeader">
+            <?xml version="1.0" encoding="utf-8"?>
+            <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+            <svg version="1.1" id="zebraLogo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68.74 110"><defs><style>.a{fill:#fff;}</style></defs><title>zebra-logo-white</title><polygon class="a" points="50.93 39.44 45.52 34.03 45.52 49.32 50.93 49.32 50.93 39.44"/><path class="a" d="M58.95,31.16H72.1l-5.38-5.38,0,0H59.78A8.9,8.9,0,0,0,58.95,8V25.78h0L44.16,11q-1.17.61-2.28,1.33a27.07,27.07,0,0,0-2.33,1.71L53.55,28v30.6l10.8,10.8V61.79l-5.4-5.4V31.16Z" transform="translate(-29.63 -8)"/><polygon class="a" points="34.72 23.19 34.69 49.28 40.09 49.28 40.12 28.62 34.72 23.19"/><polygon class="a" points="53.26 34.03 47.85 28.63 40.12 28.63 45.52 34.03 53.26 34.03"/><path class="a" d="M48.14,53.54V53.22h0V30.3L35.73,17.89a27,27,0,0,0-3,4.6l10,10v7.64h0L30.55,28a26.88,26.88,0,0,0-.92,6.72S47.54,52.91,48.14,53.54" transform="translate(-29.63 -8)"/><polygon class="a" points="0.09 34.43 0.09 42.07 34.72 76.7 34.72 69.06 0.09 34.43"/><path class="a" d="M91.36,50.49H86v6.83h-5.4a8.9,8.9,0,1,0,17.79,0Z" transform="translate(-29.63 -8)"/><polygon class="a" points="12.68 106.71 10.83 110 0.04 110 7.04 96.55 0.84 96.55 2.57 93.27 13.33 93.27 6.33 106.71 12.68 106.71"/><polygon class="a" points="18.78 99.97 24.3 99.97 24.3 103.25 18.78 103.25 18.78 106.71 24.3 106.71 24.3 110 14.72 110 14.72 93.27 24.3 93.27 24.3 96.55 18.78 96.55 18.78 99.97"/><path class="a" d="M61.46,101.27c2.13,0,3.36.23,4.27,0.8a4.3,4.3,0,0,1,1.86,3.74,4,4,0,0,1-1.13,2.91,3.22,3.22,0,0,1-1.76,1,3.59,3.59,0,0,1,2,1,3.79,3.79,0,0,1,1.13,2.91,4.34,4.34,0,0,1-1.71,3.66,6,6,0,0,1-3.54.78H55.74V101.27h5.72Zm-1.66,6.92h1c1.86,0,2.63-.58,2.63-2s-0.78-1.93-2.69-1.93h-1v3.89Zm0,6.9h1.48c1.71,0,2.43-.58,2.43-1.93a1.78,1.78,0,0,0-.9-1.71,3.92,3.92,0,0,0-2.08-.3H59.8v3.94Z" transform="translate(-29.63 -8)"/><path class="a" d="M73.66,118H69.59V101.27H75a7.89,7.89,0,0,1,4.92,1.25,5.22,5.22,0,0,1,1.81,4.24,4.94,4.94,0,0,1-3.24,5.09L82.19,118H77.32l-3.66-6.47V118Zm1.3-8.76c1.66,0,2.66-.85,2.66-2.31a2.26,2.26,0,0,0-2.41-2.33H73.66v4.64H75Z" transform="translate(-29.63 -8)"/><path class="a" d="M92.88,101.27H87.71L82.19,118h4.29l1-3.25h5.45L94,118h4.41Zm-4.35,10.2,1.69-5.4,1.69,5.4H88.52Z" transform="translate(-29.63 -8)"/></svg>
+            <div id="landingPageHeaderTextContainer">
+                <span id="headerWelcomeText" class="header-text">WELCOME</span>
+                <span id="headerLinkOsText" class="header-text">Link-OS Multiplatform SDK</span>
+            </div>
+        </header>
+    </div>
+    <div id="mainContentContainer" class="clearfix">
+        <div id="landingPageOverviewContainer">
+            <div id="landingPageOverview" class="clearfix">
+                <div id="landingPageOverviewDescriptionContainer">
+                    <span>The robust <b><span class="link-os-text">Link-OS&trade;</span> Multiplatform Software Development Kit</b> enables app creation on PCs, smart phones and tablets supporting the most popular operating systems. The <span class="link-os-text">Link-OS</span> SDK makes creating powerful apps simple and straightforward.</span><br/></br>                  
+                    <span id="landingPageTermsNote">Please refer to each section for the End Use License Agreement (EULA) and the release notes.</span>
+                </div>
+                <div id="landingPageOverviewZipContainer">     
+                    <span id="landingPageOverviewZipDescription">The following platforms are supported:</span>
+                    <ul id="landingPageOverviewList">
+                        <li><a href="android/v2.16.5490/sdk_welcome.html">Android&trade; for Label & Receipt printers</a></li>
+                        <li><a href="android_card/v2.14.5198/sdk_welcome.html">Android&trade; for ZC Series Card printers</a></li>
+                        <li><a href="iOS/v1.6.1152/sdk_welcome.html">iOS&trade; for Label & Receipt printers</a></li>
+                        <li><a href="PC/v2.15.5376/sdk_welcome.html">Java for Label & Receipt printers (Desktop PC)</a></li>
+                        <li><a href="PC-Card/v2.14.5198/sdk_welcome.html">Java for ZC Series Card printers (Desktop PC)</a></li>
+                        <li><a href="PC-.NET/v3.0.3271/sdk_welcome.html">.NET for Label & Receipt printers (Desktop PC)</a></li>
+                        <li><a href="PC-.NET-Card/v2.15.2634/sdk_welcome.html">.NET for ZC Series Card printers (Desktop PC)</a></li>
+                        <li><a href="Webservices/v3.4.5429/sdk_welcome.html">Java for Label & Receipt printers (Web Services)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="landingPageFooter">
+        <span id="landingPageFooterText">
+        ZEBRA and the stylized Zebra head are trademarks of Zebra Technologies Corporation, registered in many jurisdictions worldwide. All other trademarks are the property of their respective owners. &copy;2024 Zebra Technologies Corporation and/or its affiliates. All rights reserved.</br>
+        <a href="http://www.zebra.com">www.zebra.com</a>
+        </span>
+    </footer>
+</body>
+</html>

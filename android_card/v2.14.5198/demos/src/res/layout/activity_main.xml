@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CONFIDENTIAL AND PROPRIETARY
+
+    The source code and other information contained herein is the confidential and exclusive property of
+    ZIH Corp. and is subject to the terms and conditions in your end user license agreement.
+    This source code, and any other information contained herein, shall not be copied, reproduced, published,
+    displayed or distributed, in whole or in part, in any medium, by any means, for any purpose except as
+    expressly permitted under such license agreement.
+
+    Copyright ZIH Corp. 2018
+
+    ALL RIGHTS RESERVED
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zebra.developerdemocard.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/container_margin">
+
+            <FrameLayout
+                android:id="@+id/noPrinterSelectedContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                tools:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/header_container_padding"
+                    android:gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="@dimen/zebra_custom_button_text"
+                    android:textStyle="bold"
+                    android:text="@string/no_printer_selected"
+                    android:drawableTop="@drawable/ic_lg_error"
+                    android:drawablePadding="@dimen/header_container_padding"/>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/printerSelectedContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/header_container_padding"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone"
+                android:background="@android:color/white"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                tools:visibility="visible">
+
+                <com.zebra.zebraui.ZebraPrinterView
+                    android:id="@+id/printerView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/header_container_padding" />
+
+                <TextView
+                    android:id="@+id/printerModel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/zebra_custom_button_text"
+                    tools:text="Printer Model" />
+
+                <TextView
+                    android:id="@+id/printerAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textStyle="italic"
+                    tools:text="192.168.0.1" />
+
+            </LinearLayout>
+
+            <include layout="@layout/overlay_progress" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/container_margin"
+            android:layout_marginLeft="@dimen/container_margin"
+            android:layout_marginRight="@dimen/container_margin"
+            android:orientation="vertical"
+            android:background="@android:color/white">
+
+            <com.zebra.zebraui.ZebraChevronButton
+                android:id="@+id/graphicConversionDemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/graphic_conversion_demo"
+                app:zebraChevronButtonIcon="@drawable/ic_image"
+                app:zebraHasUnderline="true" />
+
+            <com.zebra.zebraui.ZebraChevronButton
+                android:id="@+id/magEncodeDemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mag_encode_demo"
+                app:zebraChevronButtonIcon="@drawable/ic_credit_card"
+                app:zebraHasUnderline="true" />
+
+            <com.zebra.zebraui.ZebraChevronButton
+                android:id="@+id/multiJobDemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/multijob_demo"
+                app:zebraChevronButtonIcon="@drawable/ic_multijob"
+                app:zebraHasUnderline="true" />
+
+            <com.zebra.zebraui.ZebraChevronButton
+                android:id="@+id/printDemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/print_ymcko_mono_demo"
+                app:zebraChevronButtonIcon="@drawable/ic_printer"
+                app:zebraHasUnderline="true" />
+
+            <com.zebra.zebraui.ZebraChevronButton
+                android:id="@+id/printerStatusDemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/printer_status_demo"
+                app:zebraChevronButtonIcon="@drawable/ic_info"
+                app:zebraHasUnderline="true" />
+
+            <com.zebra.zebraui.ZebraChevronButton
+                android:id="@+id/settingsDemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_demo"
+                app:zebraChevronButtonIcon="@drawable/ic_settings"
+                app:zebraHasUnderline="true" />
+
+            <com.zebra.zebraui.ZebraChevronButton
+                android:id="@+id/smartCardDemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/smart_card_demo"
+                app:zebraChevronButtonIcon="@drawable/ic_credit_card"
+                app:zebraHasUnderline="true" />
+
+            <com.zebra.zebraui.ZebraChevronButton
+                android:id="@+id/templateDemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/template_demo"
+                app:zebraChevronButtonIcon="@drawable/ic_code"
+                app:zebraHasUnderline="false" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

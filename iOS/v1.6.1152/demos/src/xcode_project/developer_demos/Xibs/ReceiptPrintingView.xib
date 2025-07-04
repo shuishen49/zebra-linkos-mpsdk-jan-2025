@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReceiptPrintingViewController">
+            <connections>
+                <outlet property="receiptPrintButtonAsManyJobs" destination="9" id="11"/>
+                <outlet property="receiptPrintButtonAsOneJob" destination="3" id="15"/>
+                <outlet property="view" destination="1" id="6"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LG4-0Y-CbM" userLabel="ButtonView">
+                    <rect key="frame" x="20" y="150" width="353" height="52"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3">
+                            <rect key="frame" x="20" y="11" width="113" height="30"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="Print as one job">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="printReceiptAsOneJobButtonPressed:" destination="-1" eventType="touchUpInside" id="13"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                            <rect key="frame" x="198" y="11" width="135" height="30"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="Print as many jobs">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="printReceiptAsManyJobsButtonPressed:" destination="-1" eventType="touchUpInside" id="14"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="52" id="FxR-xM-WJz"/>
+                        <constraint firstItem="3" firstAttribute="leading" secondItem="LG4-0Y-CbM" secondAttribute="leading" constant="20" id="Pdi-ya-pjx"/>
+                        <constraint firstAttribute="trailing" secondItem="9" secondAttribute="trailing" constant="20" id="lVH-FI-Y6B"/>
+                        <constraint firstItem="3" firstAttribute="centerY" secondItem="LG4-0Y-CbM" secondAttribute="centerY" id="o0A-2a-Vrf"/>
+                        <constraint firstItem="9" firstAttribute="centerY" secondItem="LG4-0Y-CbM" secondAttribute="centerY" id="pvW-vi-xTI"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="LG4-0Y-CbM" secondAttribute="trailing" constant="20" id="AXZ-Qd-U0i"/>
+                <constraint firstItem="LG4-0Y-CbM" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="GzP-xN-Ksl"/>
+                <constraint firstItem="LG4-0Y-CbM" firstAttribute="top" secondItem="1" secondAttribute="top" constant="150" id="bpW-Va-KlA"/>
+                <constraint firstItem="LG4-0Y-CbM" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="s8F-e7-SjM"/>
+            </constraints>
+            <point key="canvasLocation" x="-13" y="-53"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

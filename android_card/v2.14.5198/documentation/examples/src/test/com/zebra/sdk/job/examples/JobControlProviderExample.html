@@ -1,0 +1,100 @@
+<pre>package test.com.zebra.sdk.job.examples;
+
+import java.util.*;
+
+import com.zebra.sdk.comm.*;
+import com.zebra.sdk.common.card.exceptions.ZebraCardException;
+import com.zebra.sdk.common.card.printer.*;
+import com.zebra.sdk.settings.SettingsException;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.*;
+import android.widget.*;
+
+public class JobControlProviderExample extends Activity {
+
+	private Button button;
+
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		LinearLayout layout = (LinearLayout) View.inflate(this, android.R.layout.activity_list_item, null);
+
+		button = new Button(this);
+		button.setText("Get Job Settings");
+		button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		layout.addView(button);
+
+		setContentView(layout);
+
+		button.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				new Thread(new Runnable() {
+					public void run() {
+						Connection connection = null;
+						ZebraCardPrinter zebraCardPrinter = null;
+
+						try {
+							connection = new TcpConnection("1.2.3.4", 9100);
+							connection.open();
+
+							zebraCardPrinter = ZebraCardPrinterFactory.getInstance(connection);
+							displayJobSettings(zebraCardPrinter);
+						} catch (Exception e) {
+							showToastMessage("Error retrieving job settings: " + e.getMessage());
+						} finally {
+							cleanUpQuietly(connection, zebraCardPrinter);
+						}
+					}
+				}).start();
+			}
+		});
+	}
+
+	private void displayJobSettings(ZebraCardPrinter zebraCardPrinter) throws SettingsException {
+		if (zebraCardPrinter != null) {
+			System.out.println("Available Job Settings for myDevice:");
+			Set&lt;String&gt; availableJobSettings = zebraCardPrinter.getJobSettings();
+			for (String setting : availableJobSettings) {
+				System.out.println(setting + ": Range = (" + zebraCardPrinter.getJobSettingRange(setting) + ")");
+			}
+
+			System.out.println("\nCurrent Job Setting Values for myDevice:");
+			Map&lt;String, String&gt; allJobSettingValues = zebraCardPrinter.getAllJobSettingValues();
+			for (String settingName : allJobSettingValues.keySet()) {
+				System.out.println(settingName + ":" + allJobSettingValues.get(settingName));
+			}
+		}
+	}
+
+	private void showToastMessage(final String message) {
+		runOnUiThread(new Runnable() {
+			public void run() {
+				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+			}
+		});
+	}
+
+	private void cleanUpQuietly(Connection connection, ZebraCardPrinter genericPrinter) {
+		try {
+			if (genericPrinter != null) {
+				genericPrinter.destroy();
+				genericPrinter = null;
+			}
+		} catch (ZebraCardException e) {
+			e.printStackTrace();
+		}
+
+		if (connection != null) {
+			try {
+				connection.close();
+				connection = null;
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+</pre>

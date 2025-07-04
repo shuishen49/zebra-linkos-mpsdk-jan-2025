@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConnectionSetupController">
+            <connections>
+                <outlet property="bluetoothButton" destination="29" id="32"/>
+                <outlet property="bluetoothPrinterLabel" destination="33" id="35"/>
+                <outlet property="bluetoothView" destination="28" id="31"/>
+                <outlet property="ipDnsTextField" destination="7" id="11"/>
+                <outlet property="networkView" destination="23" id="27"/>
+                <outlet property="portTextField" destination="8" id="12"/>
+                <outlet property="segmentedControl" destination="24" id="25"/>
+                <outlet property="statusLabel" destination="19" id="20"/>
+                <outlet property="view" destination="1" id="3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" id="1" customClass="UIControl">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="460"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" text="Status : Not Connected" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="19">
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="20"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                    <color key="textColor" systemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="28">
+                    <rect key="frame" x="0.0" y="62.000000000000007" width="400" height="92.666666666666686"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29">
+                            <rect key="frame" x="217" y="15" width="83" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="Change...">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="chooseBluetoothButtonPressed:" destination="-1" eventType="touchUpInside" id="30"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Choose Printer..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33">
+                            <rect key="frame" x="20" y="33" width="189" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" systemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Selected printer serial #" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36">
+                            <rect key="frame" x="20" y="4" width="189" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" systemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="28" secondAttribute="height" multiplier="160:37" id="dZA-Ui-Uxj"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" ambiguous="YES" id="23" customClass="UIControl">
+                    <rect key="frame" x="0.0" y="59.000000000000007" width="400" height="92.666666666666686"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="IP/DNS :" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="4">
+                            <rect key="frame" x="20" y="5" width="81" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Jeff"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" systemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Port :" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="6">
+                            <rect key="frame" x="20" y="44" width="81" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" systemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type in an ip or DNS" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                            <rect key="frame" x="109" y="0.0" width="271" height="31"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="textFieldDoneEditing:" destination="-1" eventType="editingDidEndOnExit" id="13"/>
+                            </connections>
+                        </textField>
+                        <textField opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="type in a port number" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8">
+                            <rect key="frame" x="109" y="39" width="271" height="31"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            <connections>
+                                <action selector="textFieldDoneEditing:" destination="-1" eventType="editingDidEndOnExit" id="14"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="92.5" id="Hqu-aE-Nus"/>
+                    </constraints>
+                </view>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="24">
+                    <rect key="frame" x="111" y="22" width="178" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="24" secondAttribute="height" multiplier="23:4" id="q4Y-xJ-F6C"/>
+                    </constraints>
+                    <segments>
+                        <segment title="Network"/>
+                        <segment title="Bluetooth"/>
+                    </segments>
+                    <connections>
+                        <action selector="segmentedControlChanged:" destination="-1" eventType="valueChanged" id="26"/>
+                    </connections>
+                </segmentedControl>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="28" firstAttribute="top" secondItem="24" secondAttribute="bottom" constant="9" id="9aL-ek-EKq"/>
+                <constraint firstItem="24" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="FUi-K1-mW3"/>
+                <constraint firstAttribute="trailing" secondItem="28" secondAttribute="trailing" id="J0S-BX-Fa4"/>
+                <constraint firstItem="19" firstAttribute="top" secondItem="1" secondAttribute="top" id="OLF-uj-TbS"/>
+                <constraint firstAttribute="trailing" secondItem="19" secondAttribute="trailing" id="XW1-RM-Avu"/>
+                <constraint firstItem="23" firstAttribute="top" secondItem="24" secondAttribute="bottom" constant="6" id="bEg-B5-kr5"/>
+                <constraint firstAttribute="trailing" secondItem="23" secondAttribute="trailing" id="cZI-aO-SDF"/>
+                <constraint firstItem="24" firstAttribute="top" secondItem="19" secondAttribute="bottom" constant="2" id="kAp-s2-Moj"/>
+                <constraint firstItem="23" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="sjI-So-9Mb"/>
+                <constraint firstItem="28" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="yIB-36-1Jf"/>
+                <constraint firstItem="19" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ykB-0f-jyH"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <action selector="backgroundTap:" destination="-1" eventType="touchDown" id="15"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="-11"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="darkTextColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

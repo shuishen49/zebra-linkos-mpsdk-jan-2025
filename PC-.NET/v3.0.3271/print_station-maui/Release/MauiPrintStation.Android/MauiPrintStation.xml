@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MauiPrintStation</name>
+    </assembly>
+    <members>
+        <member name="M:MauiPrintStation.Droid.MainActivity.CheckPermission(System.String)">
+            This method checks if a runtime permission has been granted.
+            @param permission The permission to check.
+            @return <code>true</code> if the permission has been granted, <code>false</code> otherwise.
+        </member>
+    </members>
+</doc>

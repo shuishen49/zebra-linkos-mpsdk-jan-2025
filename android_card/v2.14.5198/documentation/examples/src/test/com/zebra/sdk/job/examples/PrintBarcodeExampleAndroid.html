@@ -1,0 +1,201 @@
+<pre>package test.com.zebra.sdk.job.examples;
+
+import java.io.IOException;
+import java.util.*;
+
+import com.zebra.sdk.comm.*;
+import com.zebra.sdk.common.card.containers.*;
+import com.zebra.sdk.common.card.enumerations.*;
+import com.zebra.sdk.common.card.exceptions.ZebraCardException;
+import com.zebra.sdk.common.card.graphics.*;
+import com.zebra.sdk.common.card.graphics.barcode.*;
+import com.zebra.sdk.common.card.graphics.barcode.enumerations.*;
+import com.zebra.sdk.common.card.jobSettings.ZebraCardJobSettingNames;
+import com.zebra.sdk.common.card.printer.*;
+import com.zebra.sdk.device.ZebraIllegalArgumentException;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.*;
+import android.widget.*;
+
+public class PrintBarcodeExampleAndroid extends Activity {
+
+	private Button button;
+
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		LinearLayout layout = (LinearLayout) View.inflate(this, android.R.layout.activity_list_item, null);
+
+		button = new Button(this);
+		button.setText("Print Barcodes");
+		button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		layout.addView(button);
+
+		setContentView(layout);
+
+		button.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				new Thread(new Runnable() {
+					public void run() {
+						Connection connection = null;
+						ZebraCardPrinter zebraCardPrinter = null;
+
+						try {
+							connection = new TcpConnection("1.2.3.4", 9100);
+							connection.open();
+
+							zebraCardPrinter = ZebraCardPrinterFactory.getInstance(connection);
+
+							List&lt;GraphicsInfo&gt; graphicsData = new ArrayList&lt;GraphicsInfo&gt;();
+							graphicsData.add(drawGraphics(zebraCardPrinter));
+
+							zebraCardPrinter.setJobSetting(ZebraCardJobSettingNames.K_OPTIMIZATION_FRONT, "Barcode");
+
+							// Send job
+							int jobId = zebraCardPrinter.print(1, graphicsData);
+
+							// Poll job status
+							JobStatusInfo jobStatusInfo = pollJobStatus(jobId, zebraCardPrinter);
+							showToastMessage(String.format(Locale.US, "Job %d completed with status '%s'", jobId, jobStatusInfo.printStatus));
+						} catch (Exception e) {
+							showToastMessage("Error printing barcode image: " + e.getLocalizedMessage());
+						} finally {
+							cleanUpQuietly(connection, zebraCardPrinter);
+						}
+					}
+				}).start();
+			}
+		});
+	}
+
+	private GraphicsInfo drawGraphics(ZebraCardPrinter zebraCardPrinter) throws ConnectionException, IOException, ZebraCardException {
+		ZebraGraphics graphics = null;
+		try {
+			graphics = new ZebraCardGraphics(zebraCardPrinter);
+			graphics.initialize(getApplicationContext(), 0, 0, OrientationType.Landscape, PrintType.MonoK, Color.WHITE);
+
+			drawQRCode(graphics);
+			drawCode39(graphics);
+			drawCode128(graphics);
+			drawCodePDF417(graphics);
+
+			ZebraCardImageI imageData = graphics.createImage();
+			return addBasicImage(CardSide.Front, PrintType.MonoK, 0, 0, -1, imageData.getImageData());
+		} finally {
+			if (graphics != null) {
+				graphics.close();
+			}
+		}
+	}
+
+	private void drawQRCode(ZebraGraphics graphics) throws IllegalArgumentException, ZebraCardException {
+		CodeQRUtil codeQRUtil = ZebraBarcodeFactory.getQRCode(graphics);
+		codeQRUtil.drawBarcode("https://www.zebra.com", 50, 50, 100, 100, Rotation.ROTATE_0);
+	}
+
+	private void drawCode39(ZebraGraphics graphics) throws IllegalArgumentException, ZebraCardException {
+		Code39Util code39Util = ZebraBarcodeFactory.getCode39(graphics);
+		code39Util.setMessagePosition(HumanReadablePlacement.BOTTOM);
+		code39Util.setDisplayStartStopChars(true);
+		code39Util.drawBarcode("1234567890", 50, 175, 400, 75, Rotation.ROTATE_0);
+	}
+
+	private void drawCode128(ZebraGraphics graphics) throws IllegalArgumentException, ZebraCardException {
+		BarcodeUtil barcodeUtil = ZebraBarcodeFactory.getCode128(graphics);
+		barcodeUtil.setMessagePosition(HumanReadablePlacement.BOTTOM);
+		barcodeUtil.drawBarcode("Code128 Test", 50, 325, 400, 75, Rotation.ROTATE_0);
+	}
+
+	private void drawCodePDF417(ZebraGraphics graphics) throws IllegalArgumentException, ZebraCardException {
+		CodePDF417Util codePDF417Util = ZebraBarcodeFactory.getCodePDF417(graphics);
+		codePDF417Util.drawBarcode("Zebra Technologies", 50, 450, 400, 300, Rotation.ROTATE_0);
+	}
+
+	private GraphicsInfo addBasicImage(CardSide side, PrintType printType, int xOffset, int yOffset, int fillColor, byte[] imageData) {
+		GraphicsInfo graphicsInfo = new GraphicsInfo();
+		graphicsInfo.fillColor = fillColor;
+		graphicsInfo.graphicData = imageData != null ? new ZebraCardImage(imageData) : null;
+		graphicsInfo.graphicType = imageData != null ? GraphicType.BMP : GraphicType.NA;
+		graphicsInfo.opacity = 0;
+		graphicsInfo.overprint = false;
+		graphicsInfo.printType = printType;
+		graphicsInfo.side = side;
+		graphicsInfo.xOffset = xOffset;
+		graphicsInfo.yOffset = yOffset;
+		return graphicsInfo;
+	}
+
+	private JobStatusInfo pollJobStatus(int jobId, ZebraCardPrinter zebraCardPrinter) throws ConnectionException, ZebraCardException, ZebraIllegalArgumentException {
+		long dropDeadTime = System.currentTimeMillis() + 40000;
+		long pollInterval = 500;
+
+		// Poll job status
+		JobStatusInfo jobStatusInfo = new JobStatusInfo();
+
+		do {
+			jobStatusInfo = zebraCardPrinter.getJobStatus(jobId);
+
+			String alarmDesc = jobStatusInfo.alarmInfo.value &gt; 0 ? String.format(Locale.US, " (%s)", jobStatusInfo.alarmInfo.description) : "";
+			String errorDesc = jobStatusInfo.errorInfo.value &gt; 0 ? String.format(Locale.US, " (%s)", jobStatusInfo.errorInfo.description) : "";
+
+			System.out.println(String.format("Job %d, Status:%s, Card Position:%s, Alarm Code:%d%s, Error Code:%d%s", jobId, jobStatusInfo.printStatus, jobStatusInfo.cardPosition, jobStatusInfo.alarmInfo.value, alarmDesc, jobStatusInfo.errorInfo.value, errorDesc));
+
+			if (jobStatusInfo.printStatus.contains("done_ok")) {
+				break;
+			} else if (jobStatusInfo.printStatus.contains("alarm_handling")) {
+				System.out.println("Alarm Detected: " + jobStatusInfo.alarmInfo.description);
+			} else if (jobStatusInfo.printStatus.contains("error") || jobStatusInfo.printStatus.contains("cancelled")) {
+				break;
+			} else if (jobStatusInfo.errorInfo.value &gt; 0) {
+				System.out.println(String.format(Locale.US, "The job encountered an error [%s] and was cancelled.", jobStatusInfo.errorInfo.description));
+				zebraCardPrinter.cancel(jobId);
+			}
+
+			if (System.currentTimeMillis() &gt; dropDeadTime) {
+				break;
+			}
+
+			try {
+				Thread.sleep(pollInterval);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+		} while (true);
+
+		return jobStatusInfo;
+	}
+
+	private void showToastMessage(final String message) {
+		runOnUiThread(new Runnable() {
+			public void run() {
+				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+			}
+		});
+	}
+
+	private void cleanUpQuietly(Connection connection, ZebraCardPrinter genericPrinter) {
+		try {
+			if (genericPrinter != null) {
+				genericPrinter.destroy();
+				genericPrinter = null;
+			}
+		} catch (ZebraCardException e) {
+			e.printStackTrace();
+		}
+
+		if (connection != null) {
+			try {
+				connection.close();
+				connection = null;
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+</pre>

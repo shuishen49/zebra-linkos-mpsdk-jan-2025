@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CONFIDENTIAL AND PROPRIETARY
+
+    The source code and other information contained herein is the confidential and exclusive property of
+    ZIH Corp. and is subject to the terms and conditions in your end user license agreement.
+    This source code, and any other information contained herein, shall not be copied, reproduced, published,
+    displayed or distributed, in whole or in part, in any medium, by any means, for any purpose except as
+    expressly permitted under such license agreement.
+
+    Copyright ZIH Corp. 2018
+
+    ALL RIGHTS RESERVED
+-->
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/zebra_field_padding_horizontal"
+    android:paddingRight="@dimen/zebra_field_padding_horizontal"
+    android:paddingTop="@dimen/zebra_field_padding_vertical"
+    android:paddingBottom="@dimen/zebra_field_padding_vertical">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/zebra_field_padding_horizontal"
+            android:textColor="@color/zebra_blue"
+            android:textSize="@dimen/zebra_field_header_text"
+            android:textStyle="bold"
+            android:text="@string/type" />
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/zebra_field_header_text" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/zebra_field_padding_horizontal"
+            android:textColor="@color/zebra_blue"
+            android:textSize="@dimen/zebra_field_header_text"
+            android:textStyle="bold"
+            android:text="@string/initial_size" />
+
+        <TextView
+            android:id="@+id/initialSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/zebra_field_header_text" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/zebra_field_padding_horizontal"
+            android:textColor="@color/zebra_blue"
+            android:textSize="@dimen/zebra_field_header_text"
+            android:textStyle="bold"
+            android:text="@string/panels_remaining" />
+
+        <TextView
+            android:id="@+id/panelsRemaining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/zebra_field_header_text" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/zebra_field_padding_horizontal"
+            android:textColor="@color/zebra_blue"
+            android:textSize="@dimen/zebra_field_header_text"
+            android:textStyle="bold"
+            android:text="@string/description" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/zebra_field_header_text" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/zebra_field_padding_horizontal"
+            android:textColor="@color/zebra_blue"
+            android:textSize="@dimen/zebra_field_header_text"
+            android:textStyle="bold"
+            android:text="@string/oem_code" />
+
+        <TextView
+            android:id="@+id/oemCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/zebra_field_header_text" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/zebra_field_padding_horizontal"
+            android:textColor="@color/zebra_blue"
+            android:textSize="@dimen/zebra_field_header_text"
+            android:textStyle="bold"
+            android:text="@string/part_number" />
+
+        <TextView
+            android:id="@+id/partNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/zebra_field_header_text" />
+
+    </TableRow>
+
+</TableLayout>

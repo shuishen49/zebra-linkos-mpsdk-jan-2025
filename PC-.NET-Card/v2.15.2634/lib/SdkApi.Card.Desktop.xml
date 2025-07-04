@@ -1,0 +1,1605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>SdkApi.Card.Desktop</name>
+  </assembly>
+  <members>
+    <member name="T:Zebra.Sdk.Card.Graphics.ZebraCardGraphics">
+      <summary>
+            Used to create graphics for Zebra Card printers.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.#ctor(Zebra.Sdk.Card.Printer.ZebraCardPrinter)">
+      <summary>
+            Public Constructor to construct the ZebraCardGraphics object.
+            </summary>
+      <param name="zebraCardPrinter">An instance of a zebra card printer.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the device is busy or an error occurs communicating with the printer.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If a printer error occurs.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.BrightnessLevel">
+      <summary>
+            Sets the brightness correction level to be applied during <see cref="M:Zebra.Sdk.Card.Graphics.ZebraGraphicsI.CreateImage" />.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the value is outside of the specified range.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.Clear">
+      <summary>
+            Clears the drawing surface and all user specified parameters.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.Close">
+      <summary>
+            Releases all resources.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.ColorFromInteger(System.Int32)">
+      <summary>
+            Converts a valid ARGB integer value to a Color object.
+            </summary>
+      <param name="color">The ARGB value.</param>
+      <returns>The corresponding Color object.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided argument.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.ContrastLevel">
+      <summary>
+            Sets the contrast correction level to be applied during <see cref="M:Zebra.Sdk.Card.Graphics.ZebraGraphicsI.CreateImage" />.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If any of the arguments are outside of the specified range.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.CreateImage">
+      <summary>
+            Generates the final bitmap image.
+            </summary>
+      <returns>Instance containing the bitmap image data.</returns>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the image.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.CreateImage(System.String)">
+      <summary>
+            Generates the final bitmap image.
+            </summary>
+      <param name="profileFilePath">Path to the ICC/ICM color profile to apply to the image.</param>
+      <returns>Instance containing the bitmap image data.</returns>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the image.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.CropImage(System.Byte[],System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+            Crops an image to the supplied dimensions.
+            </summary>
+      <param name="imageData">The bitmap image data.</param>
+      <param name="x">The x coordinate of the cropped image.</param>
+      <param name="y">The y coordinate of the cropped image.</param>
+      <param name="width">The width of the cropped image.</param>
+      <param name="height">The height of the cropped image.</param>
+      <returns>Bitmap data containing the cropped image.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while cropping the image.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.Dispose">
+      <summary>
+            Releases all resources.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawEllipse(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Nullable{System.Drawing.Color},System.Nullable{System.Drawing.Color})">
+      <summary>
+            Draws an ellipse at the specified coordinates.
+            </summary>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the ellipse.</param>
+      <param name="height">The height of the ellipse.</param>
+      <param name="lineThickness">The line thickness of the ellipse.</param>
+      <param name="lineColor">The line color of the ellipse.</param>
+      <param name="fillColor">The fill color of the ellipse.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the ellipse.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawImage(System.Byte[],System.Int32,System.Int32,System.Int32,System.Int32,System.Single,Zebra.Sdk.Card.Graphics.Enumerations.RotationType)">
+      <summary>
+            Draws the image into the specified rectangle.
+            </summary>
+      <param name="imageData">The bitmap image data.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="transparency">The transparency level.</param>
+      <param name="rotationType">The rotation type for the image.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the image.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawImage(System.Byte[],System.Int32,System.Int32,System.Int32,System.Int32,Zebra.Sdk.Card.Graphics.Enumerations.RotationType)">
+      <summary>
+            Draws the image into the specified rectangle.
+            </summary>
+      <param name="imageData">The bitmap image data.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="rotationType">The rotation of the image.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the image.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawImage(System.Byte[],Zebra.Sdk.Card.Graphics.Enumerations.ImagePosition,System.Int32,System.Int32,System.Single,Zebra.Sdk.Card.Graphics.Enumerations.RotationType)">
+      <summary>
+            Draws the image at the specified image position in the rectangle.
+            </summary>
+      <param name="imageData">The bitmap image data.</param>
+      <param name="position">The position of the image in the rectangle.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="transparency">The transparency level.</param>
+      <param name="rotationType">The rotation type for the image.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the image.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawLine(System.Drawing.PointF,System.Drawing.PointF,System.Single,System.Drawing.Color)">
+      <summary>
+            Draws a line from/to the specified coordinates.
+            </summary>
+      <param name="start">The x and y coordinates of the start point.</param>
+      <param name="end">The x and y coordinates of the end point.</param>
+      <param name="lineThickness">The line thickness.</param>
+      <param name="lineColor">The line color.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the line.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawRectangle(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Nullable{System.Drawing.Color},System.Nullable{System.Drawing.Color})">
+      <summary>
+            Draws a rectangle at the specified coordinates.
+            </summary>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="lineThickness">The line thickness of the rectangle.</param>
+      <param name="lineColor">The line color of the rectangle.</param>
+      <param name="fillColor">The fill color of the rectangle.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the rectangle.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawRoundedRectangle(System.Int32,System.Int32,System.Int32,System.Int32,System.Single,System.Int32,System.Nullable{System.Drawing.Color},System.Nullable{System.Drawing.Color})">
+      <summary>
+            Draws a round-cornered rectangle at the specified coordinates.
+            </summary>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="radius">The corner radius of the rectangle.</param>
+      <param name="lineThickness">The line thickness of the rectangle.</param>
+      <param name="lineColor">The line color of the rectangle.</param>
+      <param name="fillColor">The fill color of the rectangle.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the rectangle.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawText(System.String,System.Drawing.Font,System.Drawing.Color,System.Int32,System.Int32)">
+      <summary>
+            Draws the text at the specified x and y coordinates.
+            </summary>
+      <param name="text">The text to be drawn.</param>
+      <param name="font">The font type.</param>
+      <param name="color">The text color.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the text.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawText(System.String,System.Drawing.Font,System.Drawing.Color,System.Int32,System.Int32,System.Int32)">
+      <summary>
+            Draws the text at the specified x and y coordinates and center rotates the text to the specified angle.
+            </summary>
+      <param name="text">The text to be drawn.</param>
+      <param name="font">The font type.</param>
+      <param name="color">The text color.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="angle">The angle of the the text to be drawn (center rotated).</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the text.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawText(System.String,System.Drawing.Font,System.Drawing.Color,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+            Draws the text into the specified rectangle.
+            </summary>
+      <param name="text">The text to be drawn.</param>
+      <param name="font">The font type.</param>
+      <param name="color">The text color.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="angle">The angle of the the text to be drawn (center rotated).</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the text.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawText(System.String,System.Drawing.Font,System.Drawing.Color,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+      <summary>
+            Draws the text into the specified rectangle, optionally reducing the size of the font to fit the specified rectangle.
+            </summary>
+      <param name="text">The text to be drawn.</param>
+      <param name="font">The font type.</param>
+      <param name="color">The text color.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="angle">The angle of the the text to be drawn (center rotated).</param>
+      <param name="shrinkToFit">True to reduce the font size to fit the specified <c>width</c> and <c>height</c>.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the text.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawText(System.String,System.Drawing.Font,System.Drawing.Color,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,Zebra.Sdk.Card.Graphics.Enumerations.TextAlignment,Zebra.Sdk.Card.Graphics.Enumerations.TextAlignment)">
+      <summary>
+            Draws the text into the specified rectangle using the specified alignments.
+            </summary>
+      <param name="text">The text to be drawn.</param>
+      <param name="font">The font type.</param>
+      <param name="color">The text color.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="angle">The angle of the the text to be drawn (center rotated).</param>
+      <param name="horizontal">The horizontal alignment of the text.</param>
+      <param name="vertical">The vertical alignment of the text.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the text.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.DrawText(System.String,System.Drawing.Font,System.Drawing.Color,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,Zebra.Sdk.Card.Graphics.Enumerations.TextAlignment,Zebra.Sdk.Card.Graphics.Enumerations.TextAlignment,System.Boolean)">
+      <summary>
+            Draws the text into the specified rectangle using the specified alignments, optionally reducing the size of the font to fit the specified rectangle.
+            </summary>
+      <param name="text">The text to be drawn.</param>
+      <param name="font">The font type.</param>
+      <param name="color">The text color.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="angle">The angle of the the text to be drawn (center rotated).</param>
+      <param name="horizontal">The horizontal alignment of the text.</param>
+      <param name="vertical">The vertical alignment of the text.</param>
+      <param name="shrinkToFit">True to reduce the font size to fit the specified <c>width</c> and <c>height</c>.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the text.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.ExtractBlackImageData(System.Byte[],System.Byte,System.Byte,System.Byte)">
+      <summary>
+            Separates the monochrome and color data from the specified image data using the specified threshold values.
+            </summary>
+      <param name="imageData">The 24 or 32 bpp color image data.</param>
+      <param name="redThreshold">The red pixel threshold value.</param>
+      <param name="greenThreshold">The green pixel threshold value.</param>
+      <param name="blueThreshold">The blue pixel threshold value.</param>
+      <returns>Instance of ExtractedImages containing the color and monochrome image data.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while extracting the monochrome data.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.ExtractHalfPanelImageData(System.Byte[])">
+      <summary>
+            Attempts to identify and extract the color and non-color half panel regions of the source image.
+            </summary>
+      <param name="imageData">The 24bpp bitmap color image data.</param>
+      <returns>The extracted half panel color image data.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If <c>imageData</c> is invalid or the printer model is not supported.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while extracting the half panel image data.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.GammaLevel">
+      <summary>
+            Sets the gamma correction level to be applied during <see cref="M:Zebra.Sdk.Card.Graphics.ZebraGraphicsI.CreateImage" />.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If any of the arguments are outside of the specified range.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.ImageDataToImage(System.Byte[])">
+      <summary>
+            Converts image data to an Image object.
+            </summary>
+      <param name="imageData">The raw image data.</param>
+      <returns>An Image object created from the specified <c>imageData</c>.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while converting the bitmap image data to an Image object.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.ImageToImageData(System.Drawing.Image)">
+      <summary>
+            Converts an image to a byte array.
+            </summary>
+      <param name="image">The Image object.</param>
+      <returns>The raw image data from the specified <c>image</c>.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while converting the Image to raw data.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.Initialize(System.Int32,System.Int32,Zebra.Sdk.Card.Enumerations.OrientationType,Zebra.Sdk.Card.Enumerations.PrintType,System.Nullable{System.Drawing.Color})">
+      <summary>
+            Initializes the drawing surface.
+            </summary>
+      <param name="maxWidth">The maximum width of the image.  (limited based on printer model)</param>
+      <param name="maxHeight">The maximum height of the image. (limited based on printer model)</param>
+      <param name="orientation">The orientation of the image.</param>
+      <param name="printType">The type of print to be performed.</param>
+      <param name="fillColor">The background fill color. (default is White or 0xffffff)</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs initializing the graphics objects.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.Initialize(System.Int32,System.Int32,Zebra.Sdk.Card.Enumerations.OrientationType,Zebra.Sdk.Card.Enumerations.PrintType,System.Nullable{System.Int32})">
+      <summary>
+            Initializes the drawing surface.
+            </summary>
+      <param name="maxWidth">The maximum width of the image (limited based on printer model).</param>
+      <param name="maxHeight">The maximum height of the image (limited based on printer model).</param>
+      <param name="orientation">The orientation of the image. (default is OrientationType.Landscape)</param>
+      <param name="printType">The type of print to be performed. (default is PrintType.Color)</param>
+      <param name="fillColor">The RGB background fill color. (default is White or 0xffffff)</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs initializing the graphics objects.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.MonochromeConverionType">
+      <summary>
+            Gets or Sets the monochrome conversion type to be used during <see cref="M:Zebra.Sdk.Card.Graphics.ZebraGraphicsI.CreateImage" />.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.PrinterModel">
+      <summary>
+            Gets or Sets the printer model for use when creating or processing graphic images.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.RotateImage(System.Byte[],System.Int32,System.Int32,Zebra.Sdk.Card.Graphics.Enumerations.RotationType)">
+      <summary>
+            Rotates the image by the specified <c>rotationType</c> and then resizes it.
+            </summary>
+      <param name="imageData">The bitmap image source data.</param>
+      <param name="width">The rotated image width.</param>
+      <param name="height">The rotated image height.</param>
+      <param name="rotationType">The rotation type.</param>
+      <returns>The rotated and resized bitmap image data.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rotating the image.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.RotateImage(System.Byte[],Zebra.Sdk.Card.Graphics.Enumerations.RotationType)">
+      <summary>
+            Rotates the image by the specified <c>rotationType</c>.
+            </summary>
+      <param name="imageData">The bitmap image source data.</param>
+      <param name="rotationType">The rotation type.</param>
+      <returns>The rotated bitmap image data.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rotating the image.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.SaturationLevel">
+      <summary>
+            Sets the saturation level to be applied during <see cref="M:Zebra.Sdk.Card.Graphics.ZebraGraphicsI.CreateImage" />.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If any of the arguments are outside of the specified range.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.SetColorScale(System.Int32,System.Int32,System.Int32)">
+      <summary>
+            Sets the color scale correction values for red, green, and blue pixel values during <see cref="M:Zebra.Sdk.Card.Graphics.ZebraGraphicsI.CreateImage" />.
+            </summary>
+      <param name="red">The red pixel correction value.</param>
+      <param name="blue">The blue pixel correction value.</param>
+      <param name="green">The green pixel correction value.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If any of the arguments are outside of the specified range.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.SmoothingMode">
+      <summary>
+            Gets or sets the quality of the graphics rendering.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.TextContrast">
+      <summary>
+            Gets or sets the gamma correction level used for rendering text.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.ZebraCardGraphics.TextRenderingHint">
+      <summary>
+            Gets or sets the quality of the text rendering.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.ZebraGraphics">
+      <summary>
+            Interface for Zebra card printer graphics.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.CreateImage(System.String)">
+      <summary>
+            Generates the final bitmap image.
+            </summary>
+      <param name="profileFilePath">Path to the ICC/ICM color profile to apply to the image.</param>
+      <returns>Instance containing the bitmap image data.</returns>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the image.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.DrawEllipse(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Nullable{System.Drawing.Color},System.Nullable{System.Drawing.Color})">
+      <summary>
+            Draws an ellipse at the specified coordinates.
+            </summary>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the ellipse.</param>
+      <param name="height">The height of the ellipse.</param>
+      <param name="lineThickness">The line thickness of the ellipse.</param>
+      <param name="lineColor">The line color of the ellipse.</param>
+      <param name="fillColor">The fill color of the ellipse.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the ellipse.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.DrawLine(System.Drawing.PointF,System.Drawing.PointF,System.Single,System.Drawing.Color)">
+      <summary>
+            Draws a line from/to the specified coordinates.
+            </summary>
+      <param name="start">The x and y coordinates of the start point.</param>
+      <param name="end">The x and y coordinates of the end point.</param>
+      <param name="lineThickness">The line thickness.</param>
+      <param name="lineColor">The line color.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the line.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.DrawRectangle(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Nullable{System.Drawing.Color},System.Nullable{System.Drawing.Color})">
+      <summary>
+            Draws a rectangle at the specified coordinates.
+            </summary>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="lineThickness">The line thickness of the rectangle.</param>
+      <param name="lineColor">The line color of the rectangle.</param>
+      <param name="fillColor">The fill color of the rectangle.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the rectangle.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.DrawRoundedRectangle(System.Int32,System.Int32,System.Int32,System.Int32,System.Single,System.Int32,System.Nullable{System.Drawing.Color},System.Nullable{System.Drawing.Color})">
+      <summary>
+            Draws a round-cornered rectangle at the specified coordinates.
+            </summary>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="radius">The corner radius of the rectangle.</param>
+      <param name="lineThickness">The line thickness of the rectangle.</param>
+      <param name="lineColor">The line color of the rectangle.</param>
+      <param name="fillColor">The fill color of the rectangle.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the rectangle.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.DrawText(System.String,System.Drawing.Font,System.Drawing.Color,System.Int32,System.Int32)">
+      <summary>
+            Draws the text at the specified x and y coordinates.
+            </summary>
+      <param name="text">The text to be drawn.</param>
+      <param name="font">The font type.</param>
+      <param name="color">The text color.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the text.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.DrawText(System.String,System.Drawing.Font,System.Drawing.Color,System.Int32,System.Int32,System.Int32)">
+      <summary>
+            Draws the text at the specified x and y coordinates and center rotates the text to the specified angle.
+            </summary>
+      <param name="text">The text to be drawn.</param>
+      <param name="font">The font type.</param>
+      <param name="color">The text color.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="angle">The angle of the the text to be drawn (center rotated).</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the text.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.DrawText(System.String,System.Drawing.Font,System.Drawing.Color,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+            Draws the text into the specified rectangle.
+            </summary>
+      <param name="text">The text to be drawn.</param>
+      <param name="font">The font type.</param>
+      <param name="color">The text color.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="angle">The angle of the the text to be drawn (center rotated).</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the text.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.DrawText(System.String,System.Drawing.Font,System.Drawing.Color,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+      <summary>
+            Draws the text into the specified rectangle, optionally reducing the size of the font to fit the specified rectangle.
+            </summary>
+      <param name="text">The text to be drawn.</param>
+      <param name="font">The font type.</param>
+      <param name="color">The text color.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="angle">The angle of the the text to be drawn (center rotated).</param>
+      <param name="shrinkToFit">True to reduce the font size to fit the specified <c>width</c> and <c>height</c>.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the text.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.DrawText(System.String,System.Drawing.Font,System.Drawing.Color,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,Zebra.Sdk.Card.Graphics.Enumerations.TextAlignment,Zebra.Sdk.Card.Graphics.Enumerations.TextAlignment)">
+      <summary>
+            Draws the text into the specified rectangle using the specified alignments.
+            </summary>
+      <param name="text">The text to be drawn.</param>
+      <param name="font">The font type.</param>
+      <param name="color">The text color.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="angle">The angle of the the text to be drawn (center rotated).</param>
+      <param name="horizontal">The horizontal alignment of the text.</param>
+      <param name="vertical">The vertical alignment of the text.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the text.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.DrawText(System.String,System.Drawing.Font,System.Drawing.Color,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,Zebra.Sdk.Card.Graphics.Enumerations.TextAlignment,Zebra.Sdk.Card.Graphics.Enumerations.TextAlignment,System.Boolean)">
+      <summary>
+            Draws the text into the specified rectangle using the specified alignments, optionally reducing the size of the font to fit the specified rectangle.
+            </summary>
+      <param name="text">The text to be drawn.</param>
+      <param name="font">The font type.</param>
+      <param name="color">The text color.</param>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <param name="angle">The angle of the the text to be drawn (center rotated).</param>
+      <param name="horizontal">The horizontal alignment of the text.</param>
+      <param name="vertical">The vertical alignment of the text.</param>
+      <param name="shrinkToFit">True to reduce the font size to fit the specified <c>width</c> and <c>height</c>.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the text.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.ImageDataToImage(System.Byte[])">
+      <summary>
+            Converts image data to an Image object.
+            </summary>
+      <param name="imageData">The raw image data.</param>
+      <returns>An Image object created from the specified <c>imageData</c>.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while converting the bitmap image data to an Image object.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.ImageToImageData(System.Drawing.Image)">
+      <summary>
+            Converts an image to a byte array.
+            </summary>
+      <param name="image">The Image object.</param>
+      <returns>The raw image data from the specified <c>image</c>.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while converting the Image to raw data.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.ZebraGraphics.Initialize(System.Int32,System.Int32,Zebra.Sdk.Card.Enumerations.OrientationType,Zebra.Sdk.Card.Enumerations.PrintType,System.Nullable{System.Drawing.Color})">
+      <summary>
+            Initializes the drawing surface.
+            </summary>
+      <param name="maxWidth">The maximum width of the image.  (limited based on printer model)</param>
+      <param name="maxHeight">The maximum height of the image. (limited based on printer model)</param>
+      <param name="orientation">The orientation of the image.</param>
+      <param name="printType">The type of print to be performed.</param>
+      <param name="fillColor">The background fill color. (default is White or 0xffffff)</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If there is an error with the provided arguments.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs initializing the graphics objects.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.ZebraGraphics.SmoothingMode">
+      <summary>
+            Gets or sets the quality of the graphics rendering.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.ZebraGraphics.TextContrast">
+      <summary>
+            Gets or sets the gamma correction level used for rendering text.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.ZebraGraphics.TextRenderingHint">
+      <summary>
+            Gets or sets the quality of the text rendering.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil">
+      <summary>
+            Base interface used for drawing a barcode.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.AddChecksum">
+      <summary>
+            Gets or sets whether a checksum should be generated and attached to the value to encode.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.AntiAlias">
+      <summary>
+            Gets or Sets whether AntiAlias effect should be applied to all the text in the barcode image. 
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.BackColor">
+      <summary>
+            Gets or Sets the background color.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.BarColor">
+      <summary>
+            Gets or Sets the color of the bars. 
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.BarHeight">
+      <summary>
+            Gets or Sets the bars height.  
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>BarHeight</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.BarRatio">
+      <summary>
+            Gets or Sets the wide bars' width compared to the narrow bars' width.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>BarRatio</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.BarWidth">
+      <summary>
+            Gets or Sets the narrow bars' width.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>BarWidth</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.BarWidthAdjustment">
+      <summary>
+            Gets or sets the bar width adjustment.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>BarWidthAdjustment</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.BorderColor">
+      <summary>
+            Gets or Sets the barcode control border color.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.BorderWidth">
+      <summary>
+            Gets or Sets the barcode border width.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>BorderWidth</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.BottomMargin">
+      <summary>
+            Gets or Sets the margin below the barcode bars.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>BottomMargin</c> is invalid.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.ClearBarcode">
+      <summary>
+            Reset all properties to default values
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.CodeAlignment">
+      <summary>
+            Gets or Sets the text alignment for the DisplayCode property.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.DisplayChecksum">
+      <summary>
+            Gets or sets whether the checksum value should be displayed after the value to encode in the barcode image.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.DisplayCode">
+      <summary>
+            Gets or Sets whether the value to encode will be displayed in the barcode image.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.DisplayHumanReadableText">
+      <summary>
+            Get or set the Human Readable Text to be displayed instead of the value to encode specified in the ValueToEncode property.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.DisplayStopStartChars">
+      <summary>
+            Gets or Sets whether start and stop characters should be displayed.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.DisplayText">
+      <summary>
+            Gets or Sets additional text to show in the barcode image.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.DrawBarcode(System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+            Draws the selected barcode symbology into a user defined rectangle.
+            </summary>
+      <param name="x">The x coordinate.</param>
+      <param name="y">The y coordinate.</param>
+      <param name="width">The width of the rectangle.</param>
+      <param name="height">The height of the rectangle.</param>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If any of the arguments are invalid or the value to encode is not valid for the selected barcode symbology type.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If an error occurs while rendering the barcode image.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.Font">
+      <summary>
+            Get or set the Font object used when rendering Code and Human Readable text.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.ForeColor">
+      <summary>
+            Get or set the text color to use when rendering Code and Human Readable text.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.Height">
+      <summary>
+            Get or set the barcode image height if the AutoSize property is set to false.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>Height</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.HIBCFormattedHumanReadableText">
+      <summary>
+            Get or set whether the Human Readable Text is formatted as specified by HIBC standards.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.QuietZoneWidth">
+      <summary>
+            Gets or Sets the quiet zones' width.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>QuietZoneWidth</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.Rotation">
+      <summary>
+            Get or set the rotation angle to apply to the barcode.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.TextAlignment">
+      <summary>
+            Gets or sets the text alignment for the DisplayText property.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.TextFont">
+      <summary>
+            Get or set the Font object for use when rendering the DisplayText property.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.TextForeColor">
+      <summary>
+            Get or set the text color when rendering the DisplayText property.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.TopMargin">
+      <summary>
+            Get or set the height of the margin above the barcode bars.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>TopMargin</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.UseQuietZoneForText">
+      <summary>
+            Gets or Sets whether quiet zones are used for drawing Text and/or Code properties.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.ValueToEncode">
+      <summary>
+            Gets or Sets the value to encode.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.BarcodeUtil.Width">
+      <summary>
+            Get or set the width of the barcode image if the AutoSize property is set to false.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>Width</c> is invalid.</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.Code128Util">
+      <summary>
+            Interface used to configure and draw a Code128 barcode.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.Code128Util.CharacterSet">
+      <summary>
+            Gets or sets the character set to be used with a Code128 barcode.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.Code39Util">
+      <summary>
+            Interface used to configure and draw a Code39 barcode.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.Code39Util.Extended">
+      <summary>
+            Gets or sets whether the extended version for Code39 barcodes should be used.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.CodeEANUtil">
+      <summary>
+            Interface used to configure and draw an EAN barcode.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodeEANUtil.DisplayGuardBar">
+      <summary>
+            Gets or Sets whether guard bars should be drawn.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodeEANUtil.DisplayLightMarginIndicator">
+      <summary>
+            Gets or Sets whether light margin indicators should be displayed in the barcode.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodeEANUtil.GuardBarHeight">
+      <summary>
+            Gets or Sets the height of the guard bars.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>GuardBarHeight</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodeEANUtil.SupplementCode">
+      <summary>
+            Gets or Sets the supplement value to use for EAN barcode types.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>SupplementCode</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodeEANUtil.SupplementSeparation">
+      <summary>
+            Gets or Sets the gap separation between the barcode and its supplement.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>SupplementSeparation</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodeEANUtil.SupplementTopMargin">
+      <summary>
+            Gets or Sets the height of the margin above the EAN supplement bars.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>SupplementTopMargin</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodeEANUtil.SupplementType">
+      <summary>
+            Gets or Sets the supplement type to use.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.CodePDF417Util">
+      <summary>
+            Interface used to configure and draw a PDF417 barcode.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodePDF417Util.AspectRatio">
+      <summary>
+            Gets or Sets the ratio of the height to the overall width.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>AspectRatio</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodePDF417Util.Columns">
+      <summary>
+            Gets or Sets the number of columns to use. 
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>Columns</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodePDF417Util.CompactionType">
+      <summary>
+            Gets or Sets the Compaction type to apply.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodePDF417Util.ErrorCorrectionLevel">
+      <summary>
+            Gets or Sets the error correction level to apply.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodePDF417Util.FileID">
+      <summary>
+            Gets or Sets the File ID of the Macro PDF417 symbol.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>FileID</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodePDF417Util.Rows">
+      <summary>
+            Gets or Sets the number of rows to use.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>Rows</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodePDF417Util.SegmentCount">
+      <summary>
+            Gets or Sets the number of Macro PDF417 symbols.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>SegmentCount</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodePDF417Util.SegmentIndex">
+      <summary>
+            Gets or Sets the Segment Index for a Macro PDF417 symbol.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>SegmentIndex</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.CodePDF417Util.Truncated">
+      <summary>
+            Gets or Sets whether the right side of the barcode is removed.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.QRCodeUtil">
+      <summary>
+            Interface used to configure and draw a QRCode barcode.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.QRCodeUtil.CodeVersion">
+      <summary>
+            Gets or Sets the code version to use.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.QRCodeUtil.EncodingName">
+      <summary>
+            Gets or Sets the encoding name (code page) to be used for the QRCode byte compaction mode.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>EncodingName</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.QRCodeUtil.EncodingType">
+      <summary>
+            Gets or Sets the encoding type to use.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.QRCodeUtil.ErrorCorrectionLevel">
+      <summary>
+            Gets or Sets the error correction level to apply.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.QRCodeUtil.ModuleSize">
+      <summary>
+            Gets or Sets the module size of the QRCode.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified <c>ModuleSize</c> is invalid.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Card.Graphics.Barcode.QRCodeUtil.ProcessTilde">
+      <summary>
+            Gets or Sets whether the tilde character will be processed when generating the QRCode.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.ZebraBarcodeFactory">
+      <summary>
+            Factory used to acquire an instance of a font specific barcode object.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.Barcode.ZebraBarcodeFactory.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Zebra.Sdk.Card.Graphics.Barcode.ZebraBarcodeFactory</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.Barcode.ZebraBarcodeFactory.GetCode128(Zebra.Sdk.Card.Graphics.ZebraGraphics)">
+      <summary>
+            Returns the barcode utilites class for Code128 barcodes.
+            </summary>
+      <param name="graphics">Instance of ZebraGraphics.</param>
+      <returns>Instance of Code128Util.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If <c>graphics</c> object is null.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.Barcode.ZebraBarcodeFactory.GetCode39(Zebra.Sdk.Card.Graphics.ZebraGraphics)">
+      <summary>
+            Returns the barcode utilites class for Code39 barcodes.
+            </summary>
+      <param name="graphics">Instance of ZebraGraphics.</param>
+      <returns>Instance of Code39Util.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If <c>graphics</c> object is null.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.Barcode.ZebraBarcodeFactory.GetCodeEAN13(Zebra.Sdk.Card.Graphics.ZebraGraphics)">
+      <summary>
+            Returns the barcode utilites class for EAN13 barcodes.
+            </summary>
+      <param name="graphics">Instance of ZebraGraphics.</param>
+      <returns>Instance of CodeEANUtil for the specified EAN barcode type.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If <c>graphics</c> object is null.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.Barcode.ZebraBarcodeFactory.GetCodeEAN8(Zebra.Sdk.Card.Graphics.ZebraGraphics)">
+      <summary>
+            Returns the barcode utilites class for EAN8 barcodes.
+            </summary>
+      <param name="graphics">Instance of ZebraGraphics.</param>
+      <returns>Instance of CodeEANUtil for the specified EAN barcode type.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If <c>graphics</c> object is null.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.Barcode.ZebraBarcodeFactory.GetCodePDF417(Zebra.Sdk.Card.Graphics.ZebraGraphics)">
+      <summary>
+            Returns the barcode utilites class for EAN13 barcodes.
+            </summary>
+      <param name="graphics">Instance of ZebraGraphics.</param>
+      <returns>Instance of CodeEANUtil for the specified EAN barcode type.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If <c>graphics</c> object is null.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Graphics.Barcode.ZebraBarcodeFactory.GetQRCode(Zebra.Sdk.Card.Graphics.ZebraGraphics)">
+      <summary>
+            Returns the barcode utilites class for QRCode barcodes.
+            </summary>
+      <param name="graphics">Instance of ZebraGraphics.</param>
+      <returns>Instance of QRCodeUtil.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If <c>graphics</c> object is null.</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.BarcodeRotationType">
+      <summary>
+            Specifies the rotation of the barcode.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.BarcodeRotationType.None">
+      <summary>
+            No rotation.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.BarcodeRotationType.Degree90">
+      <summary>
+            90 degree rotation.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.BarcodeRotationType.Degree180">
+      <summary>
+            180 degree rotation.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.BarcodeRotationType.Degree270">
+      <summary>
+            270 degree rotation.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.CharacterSet">
+      <summary>
+            The character set to use with the Code128 barcode symbology.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.CharacterSet.Auto">
+      <summary>
+            Automatically switch between code sets to encode the ASCII values.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.CharacterSet.A">
+      <summary>
+            Utilize Char Set A which only supports ASCII values from 0 to 95.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.CharacterSet.B">
+      <summary>
+            Utilize Char Set B which only supports ASCII values from 32 to 127.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.CharacterSet.C">
+      <summary>
+            Utilize Char Set C which only supports pairs of digits.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.CompactionType">
+      <summary>
+            Specifies the Compaction Type to apply for PDF417 symbology.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.CompactionType.Auto">
+      <summary>
+            Switch between text, binary and numeric modes in order to minimize the number of codewords to be encoded.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.CompactionType.Binary">
+      <summary>
+            Allows encoding all 256 possible 8-bit byte values. This includes all ASCII characters value from 0 to 127 
+            inclusive and provides for international character set support.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.CompactionType.Text">
+      <summary>
+            Allows encoding all printable ASCII characters, i.e. values from 32 to 126 inclusive in accordance with ISO/IEC 646, 
+            as well as selected control characters such as TAB (horizontal tab ASCII 9), LF (NL line feed, new line ASCII 10) and 
+            CR (carriage return ASCII 13).
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.CompactionType.Numeric">
+      <summary>
+            It allows encoding numeric data strings.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.PDF417ErrorCorrectionLevel">
+      <summary>
+            Specifies the Error Correction Level to apply to the PDF417 symbology.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.PDF417ErrorCorrectionLevel.Level0">
+      <summary>
+            Level 0.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.PDF417ErrorCorrectionLevel.Level1">
+      <summary>
+            Level 1.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.PDF417ErrorCorrectionLevel.Level2">
+      <summary>
+            Level 2.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.PDF417ErrorCorrectionLevel.Level3">
+      <summary>
+            Level 3.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.PDF417ErrorCorrectionLevel.Level4">
+      <summary>
+            Level 4.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.PDF417ErrorCorrectionLevel.Level5">
+      <summary>
+            Level 5.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.PDF417ErrorCorrectionLevel.Level6">
+      <summary>
+            Level 6.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.PDF417ErrorCorrectionLevel.Level7">
+      <summary>
+            Level 7.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.PDF417ErrorCorrectionLevel.Level8">
+      <summary>
+            Level 8.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion">
+      <summary>
+            Specifies the QRCode version to use.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.Auto">
+      <summary>
+            Auto.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V01">
+      <summary>
+            Version 1.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V02">
+      <summary>
+            Version 2.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V03">
+      <summary>
+            Version 3.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V04">
+      <summary>
+            Version 4.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V05">
+      <summary>
+            Version 5.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V06">
+      <summary>
+            Version 6.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V07">
+      <summary>
+            Version 7.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V08">
+      <summary>
+            Version 8.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V09">
+      <summary>
+            Version 9.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V10">
+      <summary>
+            Version 10.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V11">
+      <summary>
+            Version 11.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V12">
+      <summary>
+            Version 12.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V13">
+      <summary>
+            Version 13.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V14">
+      <summary>
+            Version 14.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V15">
+      <summary>
+            Version 15.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V16">
+      <summary>
+            Version 16.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V17">
+      <summary>
+            Version 17.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V18">
+      <summary>
+            Version 18.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V19">
+      <summary>
+            Version 19.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V20">
+      <summary>
+            Version 20.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V21">
+      <summary>
+            Version 21.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V22">
+      <summary>
+            Version 22.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V23">
+      <summary>
+            Version 23.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V24">
+      <summary>
+            Version 24.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V25">
+      <summary>
+            Version 25.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V26">
+      <summary>
+            Version 26.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V27">
+      <summary>
+            Version 27.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V28">
+      <summary>
+            Version 28
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V29">
+      <summary>
+            Version 29.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V30">
+      <summary>
+            Version 30.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V31">
+      <summary>
+            Version 31.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V32">
+      <summary>
+            Version 32.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V33">
+      <summary>
+            Version 33.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V34">
+      <summary>
+            Version 34.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V35">
+      <summary>
+            Version 35.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V36">
+      <summary>
+            Version 36.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V37">
+      <summary>
+            Version 37.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V38">
+      <summary>
+            Version 38.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V39">
+      <summary>
+            Version 39.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRCodeVersion.V40">
+      <summary>
+            Version 40.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QREncodingType">
+      <summary>
+            Specifies the QRCode encoding type to use.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QREncodingType.Auto">
+      <summary>
+            Attempt to determine encoding type automatically.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QREncodingType.Numeric">
+      <summary>
+            Used to encode data that mainly contains numeric characters.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QREncodingType.AlphaNumeric">
+      <summary>
+            Used to encode data that mainly contains alphanumeric characters.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QREncodingType.Kanji">
+      <summary>
+            Used to encode data that mainly contains Kanji characters.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QREncodingType.Byte">
+      <summary>
+            Used to encode 8 bit values.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRErrorCorrectionLevel">
+      <summary>
+            Specifies the Error Correction Level to apply to the QRCode symbology.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRErrorCorrectionLevel.L">
+      <summary>
+            Approx. 7% of codewords can be restored. Error correction level L is appropriate for high symbol 
+            quality and/or the need for the smallest possible symbol.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRErrorCorrectionLevel.M">
+      <summary>
+            Approx. 15% of codewords can be restored. Level M is described as Standard level and offers a 
+            good compromise between small size and increased reliability.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRErrorCorrectionLevel.Q">
+      <summary>
+            Approx. 25% of codewords can be restored. Level Q is a High reliability level and suitable for 
+            more critical or poor print quality applications.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.QRErrorCorrectionLevel.H">
+      <summary>
+            Approx. 30% of codewords can be restored. Level H offers the maximum achievable reliability.
+            </summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.SupplementType">
+      <summary>
+            Specifies the supplement type to use with the EAN barcode.
+            </summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.SupplementType.None">
+      <summary></summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.SupplementType.Digits2">
+      <summary></summary>
+    </member>
+    <member name="F:Zebra.Sdk.Card.Graphics.Barcode.Enumerations.SupplementType.Digits5">
+      <summary></summary>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate">
+      <summary>
+            Class for managing template related operations.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.#ctor(Zebra.Sdk.Card.Printer.ZebraCardPrinter)">
+      <summary>
+            Constructs a ZebraCardTemplate object.
+            </summary>
+      <param name="cardPrinter">Instance of ZebraCardPrinter object.</param>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.ConvertDataDocumentToDataMap(System.String)">
+      <summary>
+            Converts a JSON or XML formatted template data document into a Dictionary object.
+            </summary>
+      <param name="dataDocument">JSON or XML formatted template data document.</param>
+      <returns>A Dictionary object containing the template field names as the keys and the template field values for the key values.</returns>
+      <exception cref="T:System.IO.IOException">If an error occurs while parsing the <c>dataDocument</c>.</exception>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the <c>dataDocument</c> is invalid.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.DeleteTemplateFileData(System.String)">
+      <summary>
+            Deletes the specified template.
+            </summary>
+      <param name="templateName">The name of the template.</param>
+      <exception cref="T:System.IO.FileNotFoundException">If the specified template is not found.</exception>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified template name is invalid.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If there is an error deleting the template file.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.DeleteTemplateImage(System.String)">
+      <summary>
+            Deletes the specified template image.
+            </summary>
+      <param name="imageName">The name of the image.</param>
+      <exception cref="T:System.IO.FileNotFoundException">If the specified image is not found.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.GenerateTemplateDataJob(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+      <summary>
+            Returns an instance of the TemplateJob object containing the job specific data.
+            </summary>
+      <param name="templateData">The XML formatted template data.</param>
+      <param name="fieldDataMap">A <c>Dictionary</c> object containing the template field names as the keys and the template field values for the key values.</param>
+      <returns>A <c>TemplateJob</c> object containing the required job specific data.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the device is busy or an error occurs communicating with the printer.</exception>
+      <exception cref="T:System.IO.FileNotFoundException">If the specified template or referenced image file/s are not found.</exception>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified template data or field data is invalid.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If there is an error generating the template job.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.GenerateTemplateJob(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+      <summary>
+            Returns an instance of the TemplateJob object containing the job specific data.
+            </summary>
+      <param name="templateName">The name of the template.</param>
+      <param name="fieldDataMap">A <c>Dictionary</c> object containing the template field names as the keys and the template field values for the key values.</param>
+      <returns>A <c>TemplateJob</c> object containing the required job specific data.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the device is busy or an error occurs communicating with the printer.</exception>
+      <exception cref="T:System.IO.FileNotFoundException">If the specified template or referenced image file/s are not found.</exception>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified template data or field data is invalid.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If there is an error generating the template job.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.GetTemplateDataFields(System.String)">
+      <summary>
+            Returns a list of the template fields from the XML template data.
+            </summary>
+      <param name="templateData">The XML formatted template data.</param>
+      <returns>A <c>List</c> containing the template field names.</returns>
+      <exception cref="T:System.IO.IOException">If an error occurs while accessing the requested template.</exception>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified template data is invalid.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If there is an error retrieving the template data fields.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.GetTemplateFields(System.String)">
+      <summary>
+            Returns a list of the template fields from the specified XML template.
+            </summary>
+      <param name="templateName">The name of a previously saved template. (<see cref="M:Zebra.Sdk.Card.Job.Template.ZebraTemplate.SaveTemplateFileData(System.String,System.String)" />)</param>
+      <returns>List containing the template field names.</returns>
+      <exception cref="T:System.IO.FileNotFoundException">If the specified template is not found.</exception>
+      <exception cref="T:System.IO.IOException">If an error occurs while accessing the requested template.</exception>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified template name is invalid.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If there is an error retrieving the template data fields.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.GetTemplateFileData(System.String)">
+      <summary>
+            Returns the specified template data.
+            </summary>
+      <param name="templateName">The name of the template.</param>
+      <returns>The XML formatted template data.</returns>
+      <exception cref="T:System.IO.FileNotFoundException">If the specified template is not found.</exception>
+      <exception cref="T:System.IO.IOException">If an error occurs while accessing the requested template.</exception>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified template name is invalid.</exception>
+      <exception cref="T:Zebra.Sdk.Card.Exceptions.ZebraCardException">If there is an error retrieving the template data.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.GetTemplateFileNames">
+      <summary>
+            Returns a list of the stored template names.
+            </summary>
+      <returns>A <c>List</c> containing the stored template names.</returns>
+      <exception cref="T:System.IO.IOException">If an error occurs while accessing the stored templates.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.GetTemplateImageData(System.String)">
+      <summary>
+            Returns the raw image data from the specified image name.
+            </summary>
+      <param name="imageName">The name of the image.</param>
+      <returns>The raw image data.</returns>
+      <exception cref="T:System.IO.FileNotFoundException">If the specified image is not found.</exception>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified image name is invalid.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.GetTemplateImageNames">
+      <summary>
+            Returns a list of all stored template image names.
+            </summary>
+      <returns>A <c>List</c> containing the stroed template image file names.</returns>
+      <exception cref="T:System.IO.IOException">If an error is encountered while accessing the stored image files.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.SaveTemplateFileData(System.String,System.String)">
+      <summary>
+            Saves the specified template data.
+            </summary>
+      <param name="templateName">The name of the template.</param>
+      <param name="templateData">The XML formatted template data.</param>
+      <exception cref="T:System.IO.IOException">If there is an error saving the <c>templateData</c> to a file.</exception>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the arguments are invalid or the specified <c>templateName</c> already exists.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.SaveTemplateImage(System.String,System.Byte[])">
+      <summary>
+            Saves the specified template image data.
+            </summary>
+      <param name="imageName">The name of the image.</param>
+      <param name="imageData">The image data.</param>
+      <exception cref="T:System.IO.IOException">If an error occurs while saving the image data.</exception>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the specified image name and/or data is empty or null.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.SetTemplateFileDirectory(System.String)">
+      <summary>
+            Sets the directory location for retrieving/storing template files.
+            </summary>
+      <param name="directoryPath">The directory path for template files.</param>
+      <exception cref="T:System.IO.IOException">If there is an error accessing or creating the template file directory.</exception>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the <c>directoryPath</c> is invalid.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Job.Template.ZebraCardTemplate.SetTemplateImageDirectory(System.String)">
+      <summary>
+            Sets the directory location for retrieving/storing template image files.
+            </summary>
+      <param name="directoryPath">The directory path for template image files.</param>
+      <exception cref="T:System.IO.IOException">If there is an error accessing or creating the template image file directory.</exception>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the <c>directoryPath</c> is invalid.</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Printer.Discovery.DiscoveryUtilCard">
+      <summary>
+            Defines function used to discover information about a Zebra Card Printer.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Printer.Discovery.DiscoveryUtilCard.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Zebra.Sdk.Card.Printer.Discovery.DiscoveryUtilCard</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Printer.Discovery.DiscoveryUtilCard.GetDiscoveryDataMap(Zebra.Sdk.Comm.Connection)">
+      <summary>
+            Reads the discovery packet from the provided connection.
+            </summary>
+      <param name="connection">A <see cref="T:Zebra.Sdk.Comm.Connection" /> to a Zebra Card Printer.</param>
+      <returns>A Dictionary object containing the discovery information.</returns>
+      <exception cref="T:Zebra.Sdk.Device.ZebraIllegalArgumentException">If the <c>connection</c> is invalid.</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Card.Printer.Discovery.ZebraCardPrinterFilter">
+      <summary>
+            DiscoveredPrinterFilter implementation that filters out all unsupported devices.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Printer.Discovery.ZebraCardPrinterFilter.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Zebra.Sdk.Card.Printer.Discovery.ZebraCardPrinterFilter</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Card.Printer.Discovery.ZebraCardPrinterFilter.ShouldAddPrinter(Zebra.Sdk.Printer.Discovery.DiscoveredPrinter)">
+      <summary>
+            Determines if the <c>discoveredPrinter</c> is a supported Zebra Card Printer.
+            </summary>
+      <param name="discoveredPrinter">The discovered printer.</param>
+      <returns>True if the discoveredPrinter is a supported Zebra Card Printer.</returns>
+    </member>
+  </members>
+</doc>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CONFIDENTIAL AND PROPRIETARY
+
+    The source code and other information contained herein is the confidential and exclusive property of
+    ZIH Corp. and is subject to the terms and conditions in your end user license agreement.
+    This source code, and any other information contained herein, shall not be copied, reproduced, published,
+    displayed or distributed, in whole or in part, in any medium, by any means, for any purpose except as
+    expressly permitted under such license agreement.
+
+    Copyright ZIH Corp. 2018
+
+    ALL RIGHTS RESERVED
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.zebra.zebraui.ZebraFieldView
+                android:id="@+id/jobStatus1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:zebraHeaderText="@string/job_status_1"
+                app:zebraFieldBodyText="@string/not_started"
+                app:zebraHasUnderline="false" />
+
+            <com.zebra.zebraui.ZebraFieldView
+                android:id="@+id/jobStatus2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:zebraHeaderText="@string/job_status_2"
+                app:zebraFieldBodyText="@string/not_started"
+                app:zebraHasUnderline="false" />
+
+            <com.zebra.zebraui.ZebraFieldView
+                android:id="@+id/jobStatus3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:zebraHeaderText="@string/job_status_3"
+                app:zebraFieldBodyText="@string/not_started"
+                app:zebraHasUnderline="false" />
+
+            <com.zebra.zebraui.ZebraFieldView
+                android:id="@+id/jobStatus4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:zebraHeaderText="@string/job_status_4"
+                app:zebraFieldBodyText="@string/not_started"
+                app:zebraHasUnderline="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/zebra_field_padding_vertical"
+                android:layout_marginBottom="@dimen/zebra_field_padding_vertical"
+                android:paddingLeft="@dimen/zebra_field_padding_horizontal"
+                android:paddingRight="@dimen/zebra_field_padding_horizontal"
+                android:textColor="@color/zebra_blue"
+                android:textSize="@dimen/zebra_field_header_text"
+                android:textStyle="bold"
+                android:text="@string/job_status_log" />
+
+            <TextView
+                android:id="@+id/jobStatusText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/zebra_field_padding_horizontal"
+                android:layout_marginRight="@dimen/zebra_field_padding_horizontal"
+                android:layout_marginBottom="@dimen/zebra_field_padding_vertical"
+                android:padding="@dimen/container_margin"
+                android:background="@color/very_light_gray"
+                android:minLines="10"
+                android:scrollbars="vertical"
+                android:textSize="@dimen/job_status_log_text"
+                tools:text="This is an example job status log message." />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width_thin"
+        android:background="@color/lighter_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.zebra.zebraui.ZebraEditText
+            android:id="@+id/jobIdEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:inputType="number"
+            app:zebraHeaderText="@string/job_id"
+            app:zebraHasUnderline="false" />
+
+        <com.zebra.zebraui.ZebraButton
+            android:id="@+id/cancelJobButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textAllCaps="true"
+            android:text="@string/cancel_job" />
+
+        <com.zebra.zebraui.ZebraButton
+            android:id="@+id/cancelAllJobsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/zebra_field_padding_horizontal"
+            android:textAllCaps="true"
+            android:text="@string/cancel_all" />
+
+    </LinearLayout>
+
+</LinearLayout>

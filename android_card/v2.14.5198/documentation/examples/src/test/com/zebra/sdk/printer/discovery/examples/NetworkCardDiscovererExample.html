@@ -1,0 +1,73 @@
+<pre>package test.com.zebra.sdk.printer.discovery.examples;
+
+import java.util.*;
+
+import com.zebra.sdk.common.card.printer.discovery.NetworkCardDiscoverer;
+import com.zebra.sdk.printer.discovery.*;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.*;
+import android.widget.*;
+
+public class NetworkCardDiscovererExample extends Activity {
+
+	private Button button;
+
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		LinearLayout layout = (LinearLayout) View.inflate(this, android.R.layout.activity_list_item, null);
+
+		button = new Button(this);
+		button.setText("Discover Printers");
+		button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		layout.addView(button);
+
+		setContentView(layout);
+
+		button.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				new Thread(new Runnable() {
+					public void run() {
+						DiscoveryHandler discoveryHandler = new DiscoveryHandler() {
+							List&lt;DiscoveredPrinter&gt; printers = new ArrayList&lt;DiscoveredPrinter&gt;();
+
+							public void foundPrinter(DiscoveredPrinter printer) {
+								printers.add(printer);
+							}
+
+							public void discoveryFinished() {
+								for (DiscoveredPrinter printer : printers) {
+									System.out.println(printer);
+								}
+								showToastMessage("Discovered " + printers.size() + " printers.");
+							}
+
+							public void discoveryError(final String message) {
+								showToastMessage("An error occurred during discovery: " + message);
+							}
+						};
+
+						try {
+							System.out.println("Starting printer discovery.");
+							NetworkCardDiscoverer.findPrinters(discoveryHandler);
+						} catch (DiscoveryException e) {
+							showToastMessage("Error discovering printers: " + e.getLocalizedMessage());
+						}
+					}
+				}).start();
+			}
+		});
+	}
+
+	private void showToastMessage(final String message) {
+		runOnUiThread(new Runnable() {
+			public void run() {
+				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+			}
+		});
+	}
+}
+</pre>

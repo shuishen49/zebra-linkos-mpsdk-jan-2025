@@ -1,0 +1,101 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <!--<WindowsPackageType>None</WindowsPackageType>-->
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <!--<ItemGroup>
+    <Reference Include="Csv, Version=1.0.31.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Sdk\Csv.dll</HintPath>
+    </Reference>
+    <Reference Include="SdkApi.Core">
+      <HintPath>Sdk\SdkApi.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SdkApi.Desktop">
+      <HintPath>Sdk\SdkApi.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="SdkApi.Desktop.Usb">
+      <HintPath>Sdk\SdkApi.Desktop.Usb.dll</HintPath>
+    </Reference>
+    <Reference Include="Windows, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Sdk\Windows.winmd</HintPath>
+    </Reference>
+  </ItemGroup>-->
+  <ItemGroup>
+    <Resource Include="Resources\bt.png" />
+    <Resource Include="Resources\btn_star_big_off.png" />
+    <Resource Include="Resources\btn_star_big_on.png" />
+    <Resource Include="Resources\document.png" />
+    <Resource Include="Resources\ic_menu_delete.png" />
+    <Resource Include="Resources\ic_menu_save.png" />
+    <Resource Include="Resources\network.png" />
+    <Resource Include="Resources\usb.png" />
+    <Resource Include="Resources\zebravert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_chevron_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_action_retrieve_formats.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_chevron_right_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Zebra_Logo_K.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Zebra_Logo_Stacked_K.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="8.0.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.112.0" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.112.0" />
+    <!--<PackageReference Include="System.Data.SQLite.EF6" Version="1.0.112.0" />-->
+    <!--<PackageReference Include="EntityFramework" Version="6.4.4" />-->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Zebra.Printer.SDK" Version="3.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Remove="Zebra\PrintStation\App.xaml" />
+  </ItemGroup>
+</Project>

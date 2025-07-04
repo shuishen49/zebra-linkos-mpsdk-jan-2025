@@ -1,0 +1,35 @@
+﻿<maui:MauiWinUIApplication
+    x:Class="MauiPrintStation.WinUI.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:maui="using:Microsoft.Maui"
+    xmlns:local="using:MauiPrintStation">
+    <maui:MauiWinUIApplication.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <!-- Other merged dictionaries here -->
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--<Style TargetType="ContentControl">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ContentControl">
+                            <Grid x:Name="LayoutRoot"
+                              Background="#0299e8">
+                                
+                                <ContentPresenter x:Name="ClientAreaPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              Foreground="{TemplateBinding Foreground}" />
+
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>-->
+
+        </ResourceDictionary>
+    </maui:MauiWinUIApplication.Resources>
+</maui:MauiWinUIApplication>

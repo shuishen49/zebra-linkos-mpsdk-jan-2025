@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+		<RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+		<OutputType>WinExe</OutputType>
+		<RootNamespace>Zebra.Windows.DevDemo</RootNamespace>
+		<AssemblyName>DeveloperDemo.Windows</AssemblyName>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<UseWindowsForms>true</UseWindowsForms>
+		<UseWPF>true</UseWPF>
+		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+		<ApplicationIcon>Zebra\Windows\DevDemo\zebralogo.ico</ApplicationIcon>
+	</PropertyGroup>
+	<ItemGroup>
+		<Content Remove="Resources\Images\Zebra_Logo_W.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<ApplicationDefinition Include="Zebra\Windows\DevDemo\App.xaml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Zebra.Printer.SDK" Version="3.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<Resource Include="Resources\Images\Zebra_Logo_W.png" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,103 @@
+<pre>package test.com.zebra.sdk.job.examples;
+
+import java.util.EnumSet;
+
+import com.zebra.sdk.comm.*;
+import com.zebra.sdk.common.card.containers.MagTrackData;
+import com.zebra.sdk.common.card.enumerations.DataSource;
+import com.zebra.sdk.common.card.exceptions.ZebraCardException;
+import com.zebra.sdk.common.card.printer.*;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.*;
+import android.widget.*;
+
+public class ReadMagneticCardExampleAndroid extends Activity {
+
+	private Button button;
+
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		LinearLayout layout = (LinearLayout) View.inflate(this, android.R.layout.activity_list_item, null);
+
+		button = new Button(this);
+		button.setText("Read Magnetic Data");
+		button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		layout.addView(button);
+
+		setContentView(layout);
+
+		button.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				new Thread(new Runnable() {
+					public void run() {
+						Connection connection = null;
+						ZebraCardPrinter zebraCardPrinter = null;
+
+						try {
+							connection = new TcpConnection("1.2.3.4", 9100);
+							connection.open();
+
+							zebraCardPrinter = ZebraCardPrinterFactory.getInstance(connection);
+
+							if (zebraCardPrinter.hasMagneticEncoder()) {
+								EnumSet&lt;DataSource&gt; tracksToRead = EnumSet.range(DataSource.Track1, DataSource.Track3);
+								MagTrackData trackData = zebraCardPrinter.readMagData(tracksToRead, true);
+
+								if (tracksToRead.contains(DataSource.Track1)) {
+									System.out.println("Track 1 Data: " + trackData.track1Data);
+								}
+
+								if (tracksToRead.contains(DataSource.Track2)) {
+									System.out.println("Track 2 Data: " + trackData.track2Data);
+								}
+
+								if (tracksToRead.contains(DataSource.Track3)) {
+									System.out.println("Track 3 Data: " + trackData.track3Data);
+								}
+							} else {
+								showToastMessage("No magnetic encoder installed.");
+							}
+						} catch (Exception e) {
+							showToastMessage("Error reading magnetic card: " + e.getMessage());
+						} finally {
+							cleanUpQuietly(connection, zebraCardPrinter);
+						}
+					}
+				}).start();
+			}
+		});
+	}
+
+	private void showToastMessage(final String message) {
+		runOnUiThread(new Runnable() {
+			public void run() {
+				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+			}
+		});
+	}
+
+	private void cleanUpQuietly(Connection connection, ZebraCardPrinter genericPrinter) {
+		try {
+			if (genericPrinter != null) {
+				genericPrinter.destroy();
+				genericPrinter = null;
+			}
+		} catch (ZebraCardException e) {
+			e.printStackTrace();
+		}
+
+		if (connection != null) {
+			try {
+				connection.close();
+				connection = null;
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+</pre>

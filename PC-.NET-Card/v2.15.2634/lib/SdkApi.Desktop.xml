@@ -1,0 +1,757 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>SdkApi.Desktop</name>
+  </assembly>
+  <members>
+    <member name="T:Zebra.Sdk.Comm.BluetoothConnection">
+      <summary>
+            Establishes a Bluetooth® connection to a printer. (Windows 10 only)
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothConnection.#ctor(System.String)">
+      <summary>
+            Constructs a new Bluetooth® connection with the given <c>macAddress</c>.
+            </summary>
+      <param name="macAddress">The device's MAC address.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">Unsupported operating system.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothConnection.#ctor(System.String,System.Int32,System.Int32)">
+      <summary>
+            Constructs a new Bluetooth® connection with the given<c>macAddress</c> and timeout values.
+            </summary>
+      <param name="macAddress">The device's MAC address.</param>
+      <param name="maxTimeoutForRead">The maximum time, in milliseconds, to wait for any data to be received.</param>
+      <param name="timeToWaitForMoreData">The maximum time, in milliseconds, to wait in-between reads after the initial read.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">Unsupported operating system.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothConnection.BytesAvailable">
+      <summary>
+            Returns an estimate of the number of bytes that can be read from this connection without blocking.
+            </summary>
+      <returns>The estimated number of bytes available.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If an I/O error occurs.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothConnection.Close">
+      <summary>
+            Closes the Bluetooth® connection.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.BluetoothConnection.FriendlyName">
+      <summary>
+            Gets the friendly name of the Bluetooth® connection. The friendly name is obtained from the device when
+            this connection is opened. If the friendly name changes on the device, it will not be refreshed until the
+            connection is closed and reopened.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothConnection.GetConnectionReestablisher(System.Int64)">
+      <summary>
+            Returns a <c>ConnectionReestablisher</c> which allows for easy recreation of a connection which may have been closed.
+            </summary>
+      <param name="thresholdTime">How long the Connection reestablisher will wait before attempting to reconnection to the printer.</param>
+      <returns>Instance of <see cref="T:Zebra.Sdk.Comm.ConnectionReestablisher" /></returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the ConnectionReestablisher could not be created.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.BluetoothConnection.MACAddress">
+      <summary>
+            Gets the MAC address which was passed into the constructor. The MAC address is a hexadecimal string with
+            separators between the octets (e.g. 00:11:BB:DD:55:FF).
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothConnection.Open">
+      <summary>
+            Opens a Bluetooth® connection as specified in the constructor.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothConnection.Read(System.Int32)">
+      <summary>
+            Reads <c>maxBytesToRead</c> of the available data from the connection.
+            </summary>
+      <param name="maxBytesToRead">number of bytes to read</param>
+      <returns>the bytes read from the connection</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">if an I/O error occurs.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothConnection.ReadChar">
+      <summary>
+            Reads the next byte of data from the connection.
+            </summary>
+      <returns>The next byte from the connection.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If an I/O error occurs.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.BluetoothConnection.SimpleConnectionName">
+      <summary>
+            Gets the MAC address and the friendly name as the description.
+            </summary>
+      <returns>[MAC Address]:[Friendly Name]</returns>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothConnection.ToString">
+      <summary>
+            The friendly name is obtained from the device when this connection is opened. If the friendly name changes on the
+            device, it will not be refreshed until the connection is closed and reopened.
+            </summary>
+      <returns>
+        <c>Bluetooth</c>:[MAC Address]:[Friendly Name].</returns>
+    </member>
+    <member name="T:Zebra.Sdk.Comm.BluetoothConnectionInsecure">
+      <summary>
+            Establishes an insecure Bluetooth® connection to a printer. Insecure Bluetooth® connections do not require
+            the device and the printer to be paired. (Windows 10 only)
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothConnectionInsecure.#ctor(System.String)">
+      <summary>
+            Constructs a new insecure Bluetooth® connection with the given <c>macAddress</c>.
+            </summary>
+      <param name="macAddress">The device's MAC address.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">Unsupported operating system.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothConnectionInsecure.#ctor(System.String,System.Int32,System.Int32)">
+      <summary>
+            Constructs a new insecure Bluetooth® connection with the given <c>macAddress</c> and timeout values.
+            </summary>
+      <param name="macAddress">The device's MAC address.</param>
+      <param name="maxTimeoutForRead">The maximum time, in milliseconds, to wait for any data to be received.</param>
+      <param name="timeToWaitForMoreData">The maximum time, in milliseconds, to wait in-between reads after the initial read.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">Unsupported operating system.</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Comm.BluetoothStatusConnection">
+      <summary>
+            Establishes a Bluetooth® status only connection to a Link-OS printer. (Windows 10 only)
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothStatusConnection.#ctor(System.String)">
+      <summary>
+            Constructs a new Bluetooth® connection with the given <c>macAddress</c>.
+            </summary>
+      <param name="macAddress">The device's MAC address.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">Unsupported operating system.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothStatusConnection.#ctor(System.String,System.Int32,System.Int32)">
+      <summary>
+            Constructs a new status only Bluetooth® connection with the given <c>macAddress</c> and timeout values.
+            </summary>
+      <param name="macAddress">The device's MAC address.</param>
+      <param name="maxTimeoutForRead">The maximum time, in milliseconds, to wait for any data to be received.</param>
+      <param name="timeToWaitForMoreData">The maximum time, in milliseconds, to wait in-between reads after the initial read.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">Unsupported operating system.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothStatusConnection.BytesAvailable">
+      <summary>
+            Returns an estimate of the number of bytes that can be read from this connection without blocking.
+            </summary>
+      <returns>The estimated number of bytes available.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If an I/O error occurs.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothStatusConnection.Close">
+      <summary>
+            Closes the Bluetooth® connection.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.BluetoothStatusConnection.FriendlyName">
+      <summary>
+            Returns the friendly name of the Bluetooth® connection.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.BluetoothStatusConnection.MACAddress">
+      <summary>
+            Returns the MAC address which was passed into the constructor.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothStatusConnection.Open">
+      <summary>
+            Opens a status only Bluetooth® connection as specified in the constructor.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException"></exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothStatusConnection.Read(System.Int32)">
+      <summary>
+            Reads <c>maxBytesToRead</c> of the available data from the connection.
+            </summary>
+      <param name="maxBytesToRead">number of bytes to read</param>
+      <returns>the bytes read from the connection</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">if an I/O error occurs.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothStatusConnection.ReadChar">
+      <summary>
+            Reads the next byte of data from the connection.
+            </summary>
+      <returns>The next byte from the connection.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If an I/O error occurs.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.BluetoothStatusConnection.SimpleConnectionName">
+      <summary>
+            Return the MAC address and friendly name of the status port as the description.
+            </summary>
+      <returns>[MAC Address]:[Friendly Name]</returns>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothStatusConnection.ToString">
+      <summary>
+            Returns <c>Bluetooth_STATUS</c>:[MAC Address]:[Friendly Name].
+            </summary>
+      <returns>
+        <c>Bluetooth_STATUS</c>:[MAC Address]:[Friendly Name].</returns>
+    </member>
+    <member name="T:Zebra.Sdk.Comm.BluetoothStatusConnectionInsecure">
+      <summary>
+            Establishes a status only insecure Bluetooth® connection to a Link-OS printer. (Windows 10 only)
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothStatusConnectionInsecure.#ctor(System.String)">
+      <summary>
+            Constructs a new status only insecure Bluetooth® connection with the given <c>macAddress</c>.
+            </summary>
+      <param name="macAddress"></param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">Unsupported operating system.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.BluetoothStatusConnectionInsecure.#ctor(System.String,System.Int32,System.Int32)">
+      <summary>
+            Constructs a new status only insecure Bluetooth® connection with the given <c>macAddress</c> and timeout values.
+            </summary>
+      <param name="macAddress">The device's MAC address.</param>
+      <param name="maxTimeoutForRead">The maximum time, in milliseconds, to wait for any data to be received.</param>
+      <param name="timeToWaitForMoreData">The maximum time, in milliseconds, to wait in-between reads after the initial read.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">Unsupported operating system.</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Comm.ConnectionBuilder">
+      <summary>
+      Builds a Connection from a description string. The description string is used to specify a connection to a specific
+      device over TCP, USB, or Bluetooth® (Windows 10 only).
+    </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.ConnectionBuilder.AddConnectionType(System.Object)">
+      <summary>
+            Add a connection type to the ConnectionBuilder.
+            </summary>
+      <param name="c">Connection class.</param>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.ConnectionBuilder.Build(System.String)">
+      <summary>
+      Creates a Connection type based on the contents of <c>descriptionString</c>.
+    </summary>
+      <param name="descriptionString">
+      The format of the input string is: [prefix:] address [: port_number(s)].<br /><br /><ul><li>
+          Prefix is either TCP_MULTI, TCP, TCP_STATUS, USB (if applicable), USB_DIRECT (if applicable), BT_MULTI (if applicable),
+          BT (if applicable), or BT_STATUS (if applicable).
+        </li><li>
+          The format of address depends on the prefix
+          <ul><li>USB : address is the printer driver name.</li><li>USB_DIRECT : address is the USB symbolic name.</li><li>TCP : address is either a DNS name or an IPv4 address.</li><li>BT : address is the MAC address. (Windows 10 only)</li></ul></li><li>port_number(s) is optional, and only applicable for TCP connections.</li><li>
+          Examples:
+          <ul><li>TCP:ZBR3054027:9100</li><li>TCP_MULTI:ZBR3054027:9100:9200</li><li>USB:ZDesigner Qln320</li><li>USB_DIRECT:\\?\usb#vid_0a5f&amp;pid_00bd#qln320#...</li><li>BT:11:22:33:44:55:66</li><li>10.1.2.3</li></ul></li></ul></param>
+      <returns>Connection derived from the contents of descriptionString.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If a connection could not be established for the given descriptionString.</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Comm.DriverPrinterConnection">
+      <summary>
+            Establishes a USB connection to a printer.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.DriverPrinterConnection.#ctor(System.String)">
+      <summary>
+            Initializes a new instance of the <c>DriverPrinterConnection</c> class.
+            </summary>
+      <param name="printerName">The printer name.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException"></exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.DriverPrinterConnection.#ctor(System.String,System.Int32,System.Int32)">
+      <summary>
+            Initializes a new instance of the <c>DriverPrinterConnection</c> class.
+            </summary>
+      <param name="printerName">The printer name.</param>
+      <param name="maxTimeoutForRead">The maximum milliseconds to wait for the initial data to be received.</param>
+      <param name="timeToWaitForMoreData">The maximum milliseconds to wait for additional data to be received.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException"></exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.DriverPrinterConnection.BytesAvailable">
+      <summary>
+            Returns an estimate of the number of bytes that can be read from this connection without blocking.
+            </summary>
+      <returns>The estimated number of bytes available.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If an I/O error occurs.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.DriverPrinterConnection.Close">
+      <summary>
+            Closes this connection and releases any system resources associated with the connection.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If an I/O error occurs.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.DriverPrinterConnection.Dispose">
+      <summary>
+            Releases all resources used by the <see cref="T:Zebra.Sdk.Comm.DriverPrinterConnection" /></summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.DriverPrinterConnection.GetConnectionReestablisher(System.Int64)">
+      <summary>
+            Returns a <c>ConnectionReestablisher</c> which allows for easy recreation of a connection which may have been closed.
+            </summary>
+      <param name="thresholdTime">How long the Connection reestablisher will wait before attempting to reconnection to the printer.</param>
+      <returns>Instance of <see cref="T:Zebra.Sdk.Comm.ConnectionReestablisher" /></returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the ConnectionReestablisher could not be created.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.DriverPrinterConnection.Open">
+      <summary>
+            Opens the connection to a device.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the connection cannot be established.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.DriverPrinterConnection.PrinterName">
+      <summary>
+            Returns the name of the printer.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.DriverPrinterConnection.Read">
+      <summary>
+            Reads all the available data from the connection. This call is non-blocking.
+            </summary>
+      <returns>Data read from the connection.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If an I/O error occurs.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.DriverPrinterConnection.ReadChar">
+      <summary>
+            Reads the next byte of data from the connection.
+            </summary>
+      <returns>The next byte from the connection.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If an I/O error occurs.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.DriverPrinterConnection.SimpleConnectionName">
+      <summary>
+            Return the printer name as the description.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.DriverPrinterConnection.ToString">
+      <summary>
+            Returns <c>USB</c>:[PrinterName].
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.DriverPrinterConnection.Write(System.Byte[],System.Int32,System.Int32)">
+      <summary>
+            Writes <c>length</c> bytes from <c>data</c> starting at <c>offset</c>.
+            </summary>
+      <param name="data">The data.</param>
+      <param name="offset">The start offset in the <c>data</c>.</param>
+      <param name="length">The number of bytes to write.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">if an I/O error occurs.</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Comm.MultichannelBluetoothConnection">
+      <summary>
+            Establishes a Bluetooth® label and status connection to a printer. (Windows 10 only)
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.MultichannelBluetoothConnection.#ctor(System.String)">
+      <summary>
+            Initializes a new instance of the <c>MultichannelBluetoothConnection</c> class.
+            </summary>
+      <param name="macAddress">The MAC Address of the Printer.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">Unsupported operating system.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.MultichannelBluetoothConnection.#ctor(System.String,System.Int32,System.Int32)">
+      <summary>
+            Initializes a new instance of the <c>MultichannelBluetoothConnection</c> class.
+            </summary>
+      <param name="macAddress">The MAC Address of the Printer.</param>
+      <param name="maxTimeoutForRead">The maximum time, in milliseconds, to wait for any data to be received.</param>
+      <param name="timeToWaitForMoreData">The maximum time, in milliseconds, to wait in-between reads after the initial read.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">Unsupported operating system.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.MultichannelBluetoothConnection.#ctor(System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+            Initializes a new instance of the <c>MultichannelBluetoothConnection</c> class.
+            </summary>
+      <param name="macAddress">The MAC Address of the Printer.</param>
+      <param name="printingChannelMaxTimeoutForRead">The maximum time, in milliseconds, to wait for any data to be received on
+            the printing channel.</param>
+      <param name="printingChannelTimeToWaitForMoreData">The maximum time, in milliseconds, to wait in-between reads after the
+            initial read on the printing channel.</param>
+      <param name="statusChannelMaxTimeoutForRead">The maximum time, in milliseconds, to wait for any data to be received on
+            the status channel.</param>
+      <param name="statusChannelTimeToWaitForMoreData">The maximum time, in milliseconds, to wait in-between reads after the
+            initial read on the status channel.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">Unsupported operating system.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.MultichannelBluetoothConnection.Close">
+      <summary>
+            Closes both the printing and status channels of this MultichannelConnection.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException"></exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.MultichannelBluetoothConnection.Open">
+      <summary>
+            Opens both the printing and status channel of this Multichannel connection.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the connection cannot be established.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.MultichannelBluetoothConnection.SimpleConnectionName">
+      <summary>
+            Return the MAC address as the description.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.MultichannelBluetoothConnection.ToString">
+      <summary>
+            Returns <c>Bluetooth_MULTI</c>:[MAC Address]:[Friendly Name].
+            </summary>
+      <returns>Bluetooth_MULTI:[MAC Address]:[Friendly Name].</returns>
+    </member>
+    <member name="T:Zebra.Sdk.Comm.UsbConnection">
+      <summary>
+            Establishes a direct connection to an attached Zebra USB printer without requiring the presence of a USB driver.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.UsbConnection.#ctor(System.String)">
+      <summary>
+            Initializes a new instance of the <c>UsbConnection</c> class.
+            </summary>
+      <param name="symbolicName">The USB symbolic name for the device returned by the UsbDiscoverer.GetZebraUsbPrinters() member function.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the system is not running the Windows operating system or if the device cannot be found.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.UsbConnection.#ctor(System.String,System.Int32,System.Int32)">
+      <summary>
+            Initializes a new instance of the <c>UsbConnection</c> class.
+            </summary>
+      <param name="symbolicName">The USB symbolic name for the device returned by the UsbDiscoverer.GetZebraUsbPrinters() member function.</param>
+      <param name="maxTimeoutForRead">Maximum time to wait for read data</param>
+      <param name="timeToWaitForMoreData">Maximum time to wait for more data after intial data is sent from printer</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the system is not running the Windows operating system or if the device cannot be found.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.UsbConnection.BytesAvailable">
+      <summary>
+            Returns number of bytes currently read from printer.
+            </summary>
+      <returns>Number of bytes currently read from printer.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If an I/O error occurs.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.UsbConnection.Close">
+      <summary>
+            Closes this connection and releases any system resources associated with the connection.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If an I/O error occurs.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.UsbConnection.GetConnectionReestablisher(System.Int64)">
+      <summary>
+            Returns a <c>ConnectionReestablisher</c> which allows for easy recreation of a connection which may have been closed.
+            </summary>
+      <param name="thresholdTime">How long the Connection reestablisher will wait before attempting to reconnection to the printer.</param>
+      <returns>Instance of <see cref="T:Zebra.Sdk.Comm.ConnectionReestablisher" /></returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the ConnectionReestablisher could not be created.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.UsbConnection.Manufacturer">
+      <summary>
+            Returns printer's manufacturer.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.UsbConnection.MaxTimeoutForRead">
+      <summary>
+            Gets or sets the maximum time, in milliseconds, to wait for any data to be received.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.UsbConnection.Open">
+      <summary>
+            Opens the connection to a device.
+            </summary>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the connection cannot be established.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.UsbConnection.Read(System.Int32)">
+      <summary>
+            Reads up to maxBytesToRead into byte array
+            </summary>
+      <param name="maxBytesToRead">The maximum number of bytes to read.</param>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.UsbConnection.ReadChar">
+      <summary>
+            Reads the next byte of data from the connection.
+            </summary>
+      <returns>The next byte from the connection.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If an I/O error occurs.</exception>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.UsbConnection.SerialNumber">
+      <summary>
+            Gets the printer's serial number.
+            </summary>
+    </member>
+    <member name="P:Zebra.Sdk.Comm.UsbConnection.SimpleConnectionName">
+      <summary>
+            Gets a human-readable description of the connection.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.UsbConnection.ToString">
+      <summary>
+            Returns the Connection Builder name of the USB device.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.UsbConnection.Write(System.Byte[])">
+      <summary>
+            Writes <c>data.Length</c> bytes from the specified byte array to this output stream.
+            </summary>
+      <param name="data">Data to write</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If an I/O error occurs.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Comm.UsbConnection.Write(System.Byte[],System.Int32,System.Int32)">
+      <summary>
+            Writes <c>length</c> bytes from <c>data</c> starting at <c>offset</c>.
+            </summary>
+      <param name="data">The data.</param>
+      <param name="offset">The start offset in the <c>data</c>.</param>
+      <param name="length">The number of bytes to write.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">if an I/O error occurs.</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Graphics.ZebraImageFactory">
+      <summary>
+            A factory used to acquire an instance of a ZebraImageI.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Graphics.ZebraImageFactory.GetImage(System.Drawing.Image)">
+      <summary>
+            Creates an instance of <see cref="T:Zebra.Sdk.Graphics.ZebraImageI" /> from the image specified in <c>image</c>.
+            </summary>
+      <param name="image">The image</param>
+      <returns>An image formatted for Zebra Printers</returns>
+      <exception cref="T:System.IO.IOException">If the file could not be found, open, or is an unsupported graphic.</exception>
+      <exception cref="T:System.ArgumentException">If <c>image</c> is null</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Graphics.ZebraImageFactory.GetImage(System.IO.Stream)">
+      <summary>
+            Creates an instance of <see cref="T:Zebra.Sdk.Graphics.ZebraImageI" /> from the image data specified in <c>imageData</c></summary>
+      <param name="imageData">A stream containing the image data.</param>
+      <returns>An image formatted for Zebra Printers.</returns>
+      <exception cref="T:System.IO.IOException">If the file could not be found, open, or is an unsupported graphic.</exception>
+      <exception cref="T:System.ArgumentException">If <c>imageData</c> is null</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Graphics.ZebraImageFactory.GetImage(System.String)">
+      <summary>
+            Creates an instance of <see cref="T:Zebra.Sdk.Graphics.ZebraImageI" /> from the image specified in <c>fullPath</c>.
+            </summary>
+      <param name="fullPath">The full path of the image.</param>
+      <returns>An image formatted for Zebra Printers</returns>
+      <exception cref="T:System.IO.IOException">If the file could not be found, open, or is an unsupported graphic.</exception>
+      <exception cref="T:System.ArgumentException">If <c>fullPath</c> is null</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Printer.Discovery.BluetoothDiscoverer">
+      <summary>
+            A class that discovers Bluetooth® devices.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.BluetoothDiscoverer.FindPrinters(Zebra.Sdk.Printer.Discovery.DiscoveryHandler)">
+      <summary>
+            Find Bluetooth® devices that are discoverable.
+            </summary>
+      <param name="discoveryHandler">A <see cref="T:Zebra.Sdk.Printer.Discovery.DiscoveryHandler" /> instance that is used to handle discovery events (e.g. found a printer, errors, discovery finished).</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">For communication or discovery errors.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.BluetoothDiscoverer.FindPrinters(Zebra.Sdk.Printer.Discovery.DiscoveryHandler,System.Int32)">
+      <summary>
+            Find Bluetooth® devices that are discoverable.
+            </summary>
+      <param name="discoveryHandler">A <see cref="T:Zebra.Sdk.Printer.Discovery.DiscoveryHandler" /> instance that is used to handle discovery events (e.g. found a printer, errors, discovery finished).</param>
+      <param name="waitForResponsesTimeout">Time to wait, in milliseconds, before determining that there are no more discovery responses.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">For communication or discovery errors.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.BluetoothDiscoverer.FindPrinters(Zebra.Sdk.Printer.Discovery.DiscoveryHandler,Zebra.Sdk.Printer.Discovery.DeviceFilter)">
+      <summary>
+            Find Bluetooth® devices that are discoverable.
+            </summary>
+      <param name="discoveryHandler">A <see cref="T:Zebra.Sdk.Printer.Discovery.DiscoveryHandler" /> instance that is used to handle discovery events (e.g. found a printer, errors, discovery finished).</param>
+      <param name="deviceFilter">A custom <see cref="T:Zebra.Sdk.Printer.Discovery.DeviceFilter" /> instance used to determine whether or not a discovered device should be ignored.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">For communication or discovery errors.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.BluetoothDiscoverer.FindPrinters(Zebra.Sdk.Printer.Discovery.DiscoveryHandler,Zebra.Sdk.Printer.Discovery.DeviceFilter,System.Int32)">
+      <summary>
+            Find Bluetooth® devices that are discoverable.
+            </summary>
+      <param name="discoveryHandler">A <see cref="T:Zebra.Sdk.Printer.Discovery.DiscoveryHandler" /> instance that is used to handle discovery events (e.g. found a printer, errors, discovery finished).</param>
+      <param name="deviceFilter">A custom <see cref="T:Zebra.Sdk.Printer.Discovery.DeviceFilter" /> instance used to determine whether or not a discovered device should be ignored.</param>
+      <param name="waitForResponsesTimeout">Time to wait, in milliseconds, before determining that there are no more discovery responses.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">For communication or discovery errors.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.BluetoothDiscoverer.FindServices(System.String,Zebra.Sdk.Printer.Discovery.ServiceDiscoveryHandler)">
+      <summary>
+            Find services (ConnectionChannels) that are supported by the device at <c>macAddress</c>.
+            </summary>
+      <param name="macAddress">MAC address of the device.</param>
+      <param name="serviceDiscoveryHandler">A <see cref="T:Zebra.Sdk.Printer.Discovery.ServiceDiscoveryHandler" /> instance that is used to handle service discovery events.</param>
+      <exception cref="T:System.ArgumentException">The Bluetooth MAC address is invalid.</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Printer.Discovery.DeviceFilter">
+      <summary>
+            DeviceFilter is an interface to allow the user to write custom code to determine whether or not the 
+            BluetoothDiscoverer should include a particular BluetoothDevice in it's result set.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.DeviceFilter.ShouldAddPrinter(Windows.Devices.Bluetooth.BluetoothDevice)">
+      <summary>
+            Method called by a BluetoothDiscoverer to determine whether or not a Bluetooth® device should be added to 
+            it's list of discovered devices.
+            </summary>
+      <param name="device">BluetoothDevice to potentially be added to the list of of discovered Bluetooth® devices.</param>
+      <returns>A bool indicating whether or not a particular BluetoothDevice should be added.</returns>
+    </member>
+    <member name="T:Zebra.Sdk.Printer.Discovery.DiscoveredPrinterBluetooth">
+      <summary>
+            Instance of DiscoveredPrinter that is returned when performing a Bluetooth® discovery.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.DiscoveredPrinterBluetooth.#ctor(System.String,System.String)">
+      <summary>
+            Returns an instance of a DiscoveredPrinterBluetooth with <c>macAddress</c>.
+            </summary>
+      <param name="macAddress">MAC address of the printer.</param>
+      <param name="friendlyName">Friendly name of the printer.</param>
+    </member>
+    <member name="F:Zebra.Sdk.Printer.Discovery.DiscoveredPrinterBluetooth.friendlyName">
+      <summary>
+            The friendly name of the Bluetooth® device.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.DiscoveredPrinterBluetooth.GetConnection">
+      <summary>
+            Creates a connection based on the information in the DiscoveredPrinter response.
+            </summary>
+      <returns>a <c>Connection</c> to the discovered printer</returns>
+    </member>
+    <member name="T:Zebra.Sdk.Printer.Discovery.DiscoveredPrinterDriver">
+      <summary>
+            Instance of <see cref="T:Zebra.Sdk.Printer.Discovery.DiscoveredPrinter" /> that is returned when performing a Driver Discovery.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.DiscoveredPrinterDriver.#ctor(System.String,System.String,System.Collections.Generic.List{System.String})">
+      <summary>
+            Returns an instance of a <see cref="T:Zebra.Sdk.Printer.Discovery.DiscoveredPrinter" /> with <c>printerName</c>, <c>driverName</c>, 
+            and <c>portNames</c>.
+            </summary>
+      <param name="printerName">The printer name.</param>
+      <param name="driverName">The name of the ZebraDesigner driver.</param>
+      <param name="portNames">The port name.</param>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.DiscoveredPrinterDriver.GetConnection">
+      <summary>
+            Creates a connection based on the information in the DiscoveredPrinter response.
+            </summary>
+      <returns>a <c>Connection</c> to the discovered printer</returns>
+    </member>
+    <member name="P:Zebra.Sdk.Printer.Discovery.DiscoveredPrinterDriver.PrinterName">
+      <summary>
+            Local printer name associated with the driver.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.DiscoveredPrinterDriver.ToString">
+      <summary>
+            Returns the name of the printer.
+            </summary>
+      <returns>The printer name.</returns>
+    </member>
+    <member name="T:Zebra.Sdk.Printer.Discovery.DiscoveredUsbPrinter">
+      <summary>
+            Instance of <see cref="T:Zebra.Sdk.Printer.Discovery.DiscoveredPrinter" /> that is returned when performing a search of currently connected Zebra USB printers.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.DiscoveredUsbPrinter.#ctor(System.String)">
+      <summary>
+            Returns an instance of a <see cref="T:Zebra.Sdk.Printer.Discovery.DiscoveredUsbPrinter" /> built using built using the provided <c>symbolicName</c>.
+            </summary>
+      <param name="symbolicName">The symbolic name for the printer returned by 
+            <see cref="M:Zebra.Sdk.Printer.Discovery.UsbDiscoverer.GetZebraUsbPrinters" /> or <see cref="M:Zebra.Sdk.Printer.Discovery.UsbDiscoverer.GetZebraUsbPrinters(Zebra.Sdk.Printer.Discovery.DiscoveredPrinterFilter)" />.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If a connection to the discover USB printer cannot be established.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.DiscoveredUsbPrinter.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+      <summary>
+            Returns an instance of a <see cref="T:Zebra.Sdk.Printer.Discovery.DiscoveredUsbPrinter" /> built using the provided <c>symbolicName</c> and 
+            <c>attributes</c>.
+            </summary>
+      <param name="symbolicName">The symbolic name for the printer returned by 
+            <see cref="M:Zebra.Sdk.Printer.Discovery.UsbDiscoverer.GetZebraUsbPrinters" /> or <see cref="M:Zebra.Sdk.Printer.Discovery.UsbDiscoverer.GetZebraUsbPrinters(Zebra.Sdk.Printer.Discovery.DiscoveredPrinterFilter)" />.</param>
+      <param name="attributes">A map of attributes associated with the discovered USB printer.</param>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If a connection to the discover USB printer cannot be established.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.DiscoveredUsbPrinter.GetConnection">
+      <summary>
+            Creates a connection based on the information in the DiscoveredPrinter response.
+            </summary>
+      <returns>a <c>Connection</c> to the discovered printer</returns>
+    </member>
+    <member name="T:Zebra.Sdk.Printer.Discovery.ServiceDiscoveryHandler">
+      <summary>
+            Interface definition for a callback to be invoked for service discovery events.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.ServiceDiscoveryHandler.DiscoveryFinished">
+      <summary>
+            This method is invoked when discovery is finished.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.ServiceDiscoveryHandler.FoundService(Zebra.Sdk.Comm.ConnectionChannel)">
+      <summary>
+            This method is invoked when a service has been discovered. This method will be invoked for each service that is found.
+            </summary>
+      <param name="channel">A discovered channel.</param>
+    </member>
+    <member name="T:Zebra.Sdk.Printer.Discovery.UrlPrinterDiscoverer">
+      <summary>
+            A class used to discover a printer described by a URL. (Windows 10 only)
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.UrlPrinterDiscoverer.FindPrinters(System.String,Zebra.Sdk.Printer.Discovery.DiscoveryHandler)">
+      <summary>
+            This method will search using a combination of discovery methods to find the printer described by the specified URL. (Windows 10 only)
+            </summary>
+      <param name="url">The URL describing the targeted printer (Typically, this information is encoded on an NFC tag attached
+            to the printer)<br />
+            Example:<br /> 
+            "http://www.zebra.com/apps/r/nfc?mBL=00225832C75F&amp;mW=000000000000&amp;mE=000000000000&amp;c=QN3-AUBA0E01-00&amp;s=XXQLJ112600422&amp;v=0"</param>
+      <param name="discoveryHandler">A <see cref="T:Zebra.Sdk.Printer.Discovery.DiscoveryHandler" /> instance that is used to handle discovery events (e.g. found a
+            printer, errors, discovery finished).</param>
+      <exception cref="T:Zebra.Sdk.Printer.Discovery.DiscoveryException">If an error occurs while starting the discovery (errors during discovery will be sent
+            via <see cref="M:Zebra.Sdk.Printer.Discovery.DiscoveryHandler.DiscoveryError(System.String)" />).</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Printer.Discovery.UsbDiscoverer">
+      <summary>
+            A class used to discover USB connected Zebra printers. Printers can be accessed directly or through a Zebra Designer 
+            printer driver if your printer supports the driver.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.UsbDiscoverer.#ctor">
+      <summary>
+            A class used to discover USB connected Zebra printers. Printers can be accessed either directly or through a USB 
+            printer driver.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.UsbDiscoverer.GetZebraDriverPrinters">
+      <summary>
+            Enumerate locally installed Zebra Designer Drivers.
+            </summary>
+      <returns>List of ZebraDesigner drivers installed.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the system is not running the Windows operating system or an error occurs during discovery.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.UsbDiscoverer.GetZebraUsbPrinters">
+      <summary>
+            Enumerate all currently connected Zebra USB printers.
+            </summary>
+      <returns>List of locally connected Zebra USB printers.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the system is not running the Windows operating system or an error occurs during discovery.</exception>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.UsbDiscoverer.GetZebraUsbPrinters(Zebra.Sdk.Printer.Discovery.DiscoveredPrinterFilter)">
+      <summary>
+            Enumerate currently connected Zebra USB printers that meet the specified DiscoveredPrinterFilter criteria.
+            </summary>
+      <param name="discoveredPrinterFilter">A custom <see cref="T:Zebra.Sdk.Printer.Discovery.DiscoveredPrinterFilter" /> instance used to determine whether or not a discovered device should be ignored.</param>
+      <returns>&gt;List of locally connected Zebra USB printers.</returns>
+      <exception cref="T:Zebra.Sdk.Comm.ConnectionException">If the system is not running the Windows operating system or an error occurs during discovery.</exception>
+    </member>
+    <member name="T:Zebra.Sdk.Printer.Discovery.ZebraPrinterFilter">
+      <summary>
+            DiscoveredPrinterFilter implementation that filters out all unsupported Zebra Printers.
+            </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.ZebraPrinterFilter.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Zebra.Sdk.Printer.Discovery.ZebraPrinterFilter</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Zebra.Sdk.Printer.Discovery.ZebraPrinterFilter.ShouldAddPrinter(Zebra.Sdk.Printer.Discovery.DiscoveredPrinter)">
+      <summary>
+            Determines if the <c>discoveredPrinter</c> is a supported Zebra Printer.
+            </summary>
+      <param name="discoveredPrinter">The discovered printer.</param>
+      <returns>True if the discoveredPrinter is a supported Zebra Printer.</returns>
+    </member>
+  </members>
+</doc>

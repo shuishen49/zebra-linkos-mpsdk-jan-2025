@@ -1,0 +1,134 @@
+<pre>package test.com.zebra.sdk.settings.examples;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import com.zebra.sdk.comm.*;
+import com.zebra.sdk.common.card.exceptions.ZebraCardException;
+import com.zebra.sdk.common.card.printer.*;
+import com.zebra.sdk.common.card.printer.discovery.ZebraCardPrinterFilter;
+import com.zebra.sdk.printer.discovery.*;
+import com.zebra.sdk.settings.SettingsException;
+import com.zebra.sdk.zmotif.settings.ZebraCardSettingNamesZmotif;
+
+public class SettingsProviderExample {
+
+	public static void main(String[] args) {
+		Connection connection = null;
+		ZebraCardPrinter zebraCardPrinter = null;
+
+		try {
+			for (DiscoveredUsbPrinter usbPrinter : UsbDiscoverer.getZebraUsbPrinters(new ZebraCardPrinterFilter())) {
+				connection = usbPrinter.getConnection();
+				connection.open();
+
+				zebraCardPrinter = ZebraCardPrinterFactory.getInstance(connection);
+
+				displaySettings(zebraCardPrinter);
+				setPrinterClock(zebraCardPrinter);
+
+				cleanUpQuietly(connection, zebraCardPrinter);
+			}
+		} catch (Exception e) {
+			System.out.println("Error retrieving settings: " + e.getMessage());
+		} finally {
+			cleanUpQuietly(connection, zebraCardPrinter);
+		}
+	}
+
+	private static void displaySettings(ZebraCardPrinter zebraCardPrinter) throws SettingsException {
+		if (zebraCardPrinter != null) {
+			System.out.println("Available Settings for myDevice:");
+			Set&lt;String&gt; availableSettings = zebraCardPrinter.getAvailableSettings();
+			for (String setting : availableSettings) {
+				System.out.println(setting + ": Range = (" + zebraCardPrinter.getSettingRange(setting) + ")");
+			}
+
+			System.out.println("\nCurrent Setting Values for myDevice:");
+			Map&lt;String, String&gt; allSettingValues = zebraCardPrinter.getAllSettingValues();
+			for (String settingName : allSettingValues.keySet()) {
+				System.out.println(settingName + ":" + allSettingValues.get(settingName));
+			}
+		}
+	}
+
+	private static void setPrinterClock(ZebraCardPrinter zebraCardPrinter) {
+		try {
+			if (zebraCardPrinter != null) {
+				Set&lt;String&gt; availableSettings = zebraCardPrinter.getAvailableSettings();
+				if (availableSettings.contains(ZebraCardSettingNamesZmotif.CLOCK_MONTH)) {
+					Map&lt;String, String&gt; clockSettings = new HashMap&lt;String, String&gt;();
+
+					CurrentTime time = getCurrentTime();
+					SimpleDateFormat dateFormat = new SimpleDateFormat("M-dd-yyyy HH:mm");
+
+					clockSettings.put(ZebraCardSettingNamesZmotif.CLOCK_MONTH, Byte.toString(time.month));
+					clockSettings.put(ZebraCardSettingNamesZmotif.CLOCK_DAY, Byte.toString(time.day));
+					clockSettings.put(ZebraCardSettingNamesZmotif.CLOCK_YEAR, Integer.toString(time.year));
+					clockSettings.put(ZebraCardSettingNamesZmotif.CLOCK_HOUR, Byte.toString(time.hour));
+					clockSettings.put(ZebraCardSettingNamesZmotif.CLOCK_MINUTE, Byte.toString(time.minute));
+
+					Date date = dateFormat.parse(formatTime(clockSettings));
+					System.out.println("\nSetting the clock to: " + dateFormat.format(date));
+
+					zebraCardPrinter.setSettings(clockSettings);
+
+					List&lt;String&gt; clockSettingsNames = Arrays.asList(ZebraCardSettingNamesZmotif.CLOCK_MONTH, ZebraCardSettingNamesZmotif.CLOCK_DAY, ZebraCardSettingNamesZmotif.CLOCK_YEAR, ZebraCardSettingNamesZmotif.CLOCK_HOUR, ZebraCardSettingNamesZmotif.CLOCK_MINUTE);
+					Map&lt;String, String&gt; clockValues = zebraCardPrinter.getSettingsValues(clockSettingsNames);
+
+					date = dateFormat.parse(formatTime(clockValues));
+					System.out.println("New clock value: " + dateFormat.format(date));
+				} else {
+					System.out.println("Clock settings not available.");
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Error setting the clock: " + e.getLocalizedMessage());
+		}
+	}
+
+	private static CurrentTime getCurrentTime() {
+		CurrentTime time = new CurrentTime();
+		Calendar c = Calendar.getInstance();
+		time.month = (byte) (c.get(Calendar.MONTH) + 1);
+		time.day = (byte) c.get(Calendar.DATE);
+		time.year = c.get(Calendar.YEAR);
+		time.hour = (byte) c.get(Calendar.HOUR_OF_DAY);
+		time.minute = (byte) c.get(Calendar.MINUTE);
+		return time;
+	}
+
+	private static String formatTime(Map&lt;String, String&gt; clockSettings) {
+		return String.format(Locale.US, "%s-%s-%s %s:%02d", clockSettings.get(ZebraCardSettingNamesZmotif.CLOCK_MONTH), clockSettings.get(ZebraCardSettingNamesZmotif.CLOCK_DAY), clockSettings.get(ZebraCardSettingNamesZmotif.CLOCK_YEAR),
+				clockSettings.get(ZebraCardSettingNamesZmotif.CLOCK_HOUR), Integer.parseInt(clockSettings.get(ZebraCardSettingNamesZmotif.CLOCK_MINUTE)));
+	}
+
+	private static void cleanUpQuietly(Connection connection, ZebraCardPrinter genericPrinter) {
+		try {
+			if (genericPrinter != null) {
+				genericPrinter.destroy();
+				genericPrinter = null;
+			}
+		} catch (ZebraCardException e) {
+			e.printStackTrace();
+		}
+
+		if (connection != null) {
+			try {
+				connection.close();
+				connection = null;
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private static class CurrentTime {
+		public byte month = 0;
+		public byte day = 0;
+		public byte hour = 0;
+		public byte minute = 0;
+		public int year = 0;
+	}
+}
+</pre>

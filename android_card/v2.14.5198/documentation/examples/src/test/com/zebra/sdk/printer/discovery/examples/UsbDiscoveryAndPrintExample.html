@@ -1,0 +1,302 @@
+<pre>package test.com.zebra.sdk.printer.discovery.examples;
+
+import java.io.*;
+import java.util.*;
+
+import org.apache.commons.io.FileUtils;
+
+import com.zebra.sdk.comm.*;
+import com.zebra.sdk.common.card.containers.*;
+import com.zebra.sdk.common.card.enumerations.*;
+import com.zebra.sdk.common.card.exceptions.ZebraCardException;
+import com.zebra.sdk.common.card.graphics.*;
+import com.zebra.sdk.common.card.graphics.enumerations.RotationType;
+import com.zebra.sdk.common.card.printer.*;
+import com.zebra.sdk.device.ZebraIllegalArgumentException;
+import com.zebra.sdk.printer.discovery.*;
+import com.zebra.sdk.settings.SettingsException;
+
+import android.app.*;
+import android.content.*;
+import android.graphics.Color;
+import android.hardware.usb.*;
+import android.os.Bundle;
+import android.view.*;
+import android.widget.*;
+
+public class UsbDiscoveryAndPrintExample extends Activity {
+
+	private static final String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
+	private IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
+
+	private PendingIntent mPermissionIntent;
+	private boolean hasPermissionToCommunicate = false;
+
+	private UsbManager mUsbManager;
+	private Button buttonRequestPermission;
+	private Button buttonPrint;
+	private DiscoveredPrinterUsb discoveredPrinterUsb;
+
+	// Catches intent indicating if the user grants permission to use the USB device
+	private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (ACTION_USB_PERMISSION.equals(action)) {
+				synchronized (this) {
+					UsbDevice device = (UsbDevice) intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+					if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
+						if (device != null) {
+							hasPermissionToCommunicate = true;
+						}
+					}
+				}
+			}
+		}
+	};
+
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		LinearLayout layout = (LinearLayout) View.inflate(this, android.R.layout.activity_list_item, null);
+		layout.setOrientation(LinearLayout.VERTICAL);
+
+		buttonRequestPermission = new Button(this);
+		buttonRequestPermission.setText("Request USB Permission");
+		buttonRequestPermission.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		layout.addView(buttonRequestPermission);
+
+		buttonPrint = new Button(this);
+		buttonPrint.setText("Print");
+		buttonPrint.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		layout.addView(buttonPrint);
+
+		setContentView(layout);
+
+		// Register broadcast receiver that catches USB permission intent
+		mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
+		mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
+
+		// Request Permission button click
+		buttonRequestPermission.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				new Thread(new Runnable() {
+
+					public void run() {
+						try {
+							// Find connected printers
+							UsbDiscoveryHandler handler = new UsbDiscoveryHandler();
+							UsbDiscoverer.findPrinters(getApplicationContext(), handler);
+
+							while (!handler.isDiscoveryComplete()) {
+								Thread.sleep(100);
+							}
+
+							List&lt;DiscoveredPrinterUsb&gt; printers = handler.getDiscoveredPrinters();
+							if (printers != null && printers.size() &gt; 0) {
+								discoveredPrinterUsb = printers.get(0);
+
+								if (!mUsbManager.hasPermission(discoveredPrinterUsb.device)) {
+									mUsbManager.requestPermission(discoveredPrinterUsb.device, mPermissionIntent);
+								} else {
+									hasPermissionToCommunicate = true;
+								}
+							} else {
+								showToastMessage("No printers found");
+							}
+						} catch (final Exception e) {
+							showToastMessage("Error discovering printers: " + e.getLocalizedMessage());
+						}
+					}
+				}).start();
+			}
+		});
+
+		// Print button click
+		buttonPrint.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				Connection connection = null;
+				ZebraCardPrinter zebraCardPrinter = null;
+
+				try {
+					if (hasPermissionToCommunicate) {
+						try {
+							connection = discoveredPrinterUsb.getConnection();
+							connection.open();
+
+							zebraCardPrinter = ZebraCardPrinterFactory.getInstance(connection);
+							if (zebraCardPrinter != null) {
+								List&lt;GraphicsInfo&gt; graphicsData = drawGraphics(zebraCardPrinter);
+
+								// Send job
+								int jobId = zebraCardPrinter.print(1, graphicsData);
+
+								// Poll job status
+								JobStatusInfo jobStatusInfo = pollJobStatus(jobId, zebraCardPrinter);
+								showToastMessage(String.format(Locale.US, "Job %d completed with status '%s'", jobId, jobStatusInfo.printStatus));
+							}
+						} catch (Exception e) {
+							showToastMessage("Error printing image: " + e.getLocalizedMessage());
+						}
+					} else {
+						showToastMessage("No permission to communicate");
+					}
+				} finally {
+					cleanUpQuietly(connection, zebraCardPrinter);
+				}
+			}
+		});
+	}
+
+	protected void onPause() {
+		unregisterReceiver(mUsbReceiver);
+		super.onPause();
+	}
+
+	protected void onResume() {
+		super.onResume();
+		registerReceiver(mUsbReceiver, filter);
+	}
+
+	protected List&lt;GraphicsInfo&gt; drawGraphics(ZebraCardPrinter zebraCardPrinter) throws ZebraCardException, ConnectionException, IOException, SettingsException, ZebraIllegalArgumentException {
+		List&lt;GraphicsInfo&gt; graphicsData = new ArrayList&lt;GraphicsInfo&gt;();
+		ZebraGraphics graphics = null;
+
+		try {
+			graphics = new ZebraCardGraphics(zebraCardPrinter);
+			graphics.initialize(getApplicationContext(), 0, 0, OrientationType.Landscape, PrintType.Color, Color.WHITE);
+
+			// Front Color
+			String filepath = "path/to/myColorImage.bmp"; // replace with path to your image
+			byte[] imageData = FileUtils.readFileToByteArray(new File(filepath));
+
+			graphics.drawImage(imageData, 0, 0, 0, 0, RotationType.RotateNoneFlipNone);
+			ZebraCardImageI zebraCardImage = graphics.createImage();
+
+			graphicsData.add(addImage(CardSide.Front, PrintType.Color, 0, 0, -1, zebraCardImage));
+
+			// Front Full Overlay
+			graphicsData.add(addImage(CardSide.Front, PrintType.Overlay, 0, 0, 1, null));
+		} finally {
+			if (graphics != null) {
+				graphics.close();
+			}
+		}
+		return graphicsData;
+	}
+
+	private GraphicsInfo addImage(CardSide side, PrintType printType, int xOffset, int yOffset, int fillColor, ZebraCardImageI zebraCardImage) {
+		GraphicsInfo graphicsInfo = new GraphicsInfo();
+		graphicsInfo.fillColor = fillColor;
+		graphicsInfo.graphicData = zebraCardImage != null ? zebraCardImage : null;
+		graphicsInfo.graphicType = zebraCardImage != null ? GraphicType.BMP : GraphicType.NA;
+		graphicsInfo.opacity = 0;
+		graphicsInfo.overprint = false;
+		graphicsInfo.printType = printType;
+		graphicsInfo.side = side;
+		graphicsInfo.xOffset = xOffset;
+		graphicsInfo.yOffset = yOffset;
+		return graphicsInfo;
+	}
+
+	private JobStatusInfo pollJobStatus(int jobId, ZebraCardPrinter zebraCardPrinter) throws ConnectionException, ZebraCardException, ZebraIllegalArgumentException {
+		long dropDeadTime = System.currentTimeMillis() + 40000;
+		long pollInterval = 500;
+
+		// Poll job status
+		JobStatusInfo jobStatusInfo = new JobStatusInfo();
+
+		do {
+			jobStatusInfo = zebraCardPrinter.getJobStatus(jobId);
+
+			String alarmDesc = jobStatusInfo.alarmInfo.value &gt; 0 ? String.format(Locale.US, " (%s)", jobStatusInfo.alarmInfo.description) : "";
+			String errorDesc = jobStatusInfo.errorInfo.value &gt; 0 ? String.format(Locale.US, " (%s)", jobStatusInfo.errorInfo.description) : "";
+
+			System.out.println(String.format("Job %d, Status:%s, Card Position:%s, Alarm Code:%d%s, Error Code:%d%s", jobId, jobStatusInfo.printStatus, jobStatusInfo.cardPosition, jobStatusInfo.alarmInfo.value, alarmDesc, jobStatusInfo.errorInfo.value, errorDesc));
+
+			if (jobStatusInfo.printStatus.contains("done_ok")) {
+				break;
+			} else if (jobStatusInfo.printStatus.contains("alarm_handling")) {
+				System.out.println("Alarm Detected: " + jobStatusInfo.alarmInfo.description);
+			} else if (jobStatusInfo.printStatus.contains("error") || jobStatusInfo.printStatus.contains("cancelled")) {
+				break;
+			} else if (jobStatusInfo.errorInfo.value &gt; 0) {
+				System.out.println(String.format(Locale.US, "The job encountered an error [%s] and was cancelled.", jobStatusInfo.errorInfo.description));
+				zebraCardPrinter.cancel(jobId);
+			}
+
+			if (System.currentTimeMillis() &gt; dropDeadTime) {
+				break;
+			}
+
+			try {
+				Thread.sleep(pollInterval);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+		} while (true);
+
+		return jobStatusInfo;
+	}
+
+	private void showToastMessage(final String message) {
+		runOnUiThread(new Runnable() {
+			public void run() {
+				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+			}
+		});
+	}
+
+	private void cleanUpQuietly(Connection connection, ZebraCardPrinter genericPrinter) {
+		try {
+			if (genericPrinter != null) {
+				genericPrinter.destroy();
+				genericPrinter = null;
+			}
+		} catch (ZebraCardException e) {
+			e.printStackTrace();
+		}
+
+		if (connection != null) {
+			try {
+				connection.close();
+				connection = null;
+			} catch (ConnectionException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	// Handles USB device discovery
+	private class UsbDiscoveryHandler implements DiscoveryHandler {
+		private List&lt;DiscoveredPrinterUsb&gt; printers;
+		private boolean discoveryComplete = false;
+
+		public UsbDiscoveryHandler() {
+			printers = new LinkedList&lt;DiscoveredPrinterUsb&gt;();
+		}
+
+		public void foundPrinter(final DiscoveredPrinter printer) {
+			printers.add((DiscoveredPrinterUsb) printer);
+		}
+
+		public void discoveryFinished() {
+			discoveryComplete = true;
+		}
+
+		public void discoveryError(String message) {
+			discoveryComplete = true;
+		}
+
+		public boolean isDiscoveryComplete() {
+			return discoveryComplete;
+		}
+
+		public List&lt;DiscoveredPrinterUsb&gt; getDiscoveredPrinters() {
+			return printers;
+		}
+	}
+}
+</pre>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CONFIDENTIAL AND PROPRIETARY
+
+    The source code and other information contained herein is the confidential and exclusive property of
+    ZIH Corp. and is subject to the terms and conditions in your end user license agreement.
+    This source code, and any other information contained herein, shall not be copied, reproduced, published,
+    displayed or distributed, in whole or in part, in any medium, by any means, for any purpose except as
+    expressly permitted under such license agreement.
+
+    Copyright ZIH Corp. 2018
+
+    ALL RIGHTS RESERVED
+-->
+<resources>
+    <dimen name="container_margin">8dp</dimen>
+    <dimen name="header_container_padding">16dp</dimen>
+    <dimen name="divider_width">2dp</dimen>
+    <dimen name="divider_width_thin">1dp</dimen>
+    <dimen name="progress_bar_margin">8dp</dimen>
+
+    <dimen name="no_printers_found_icon_size">48dp</dimen>
+    <dimen name="dialog_padding">16dp</dimen>
+
+    <dimen name="job_status_log_text">12sp</dimen>
+
+    <dimen name="template_file_image_size">24dp</dimen>
+    <dimen name="template_file_padding_horizontal">24dp</dimen>
+    <dimen name="template_file_padding_vertical">6dp</dimen>
+    <dimen name="template_file_spacing">8dp</dimen>
+    <dimen name="template_preview_border_width">1dp</dimen>
+</resources>
